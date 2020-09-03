@@ -1,0 +1,100 @@
+/* 16px = 12pt = 100% = 1em */
+
+@font-face {
+    font-family: 'SourceSansPro-Regular';
+    src: url('font/source-sans-pro/SourceSansPro-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OstrichSans-Heavy.otf';
+    src: url('font/ostrich-sans/OstrichSans-Heavy.otf');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url('font/montserrat/Montserrat-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    src: url('font/montserrat/Montserrat-Light.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'boston_traffic';
+    src: url('font/boston/boston_traffic.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SourceSansPro-Black';
+    src: url('font/source-sans-pro/SourceSansPro-Bllack.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OstrichSans-Medium';
+    src: url('font/ostrich-sans/OstrichSans-Medium.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Numans-regular';
+    src: url('font/numans/Numans-regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Monument';
+    src: url('font/monument/Monument.otf');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'plicata';
+    src: url('font/plicata/plicata.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'georgina';
+    src: url('font/georgina/georgina.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserrat';
+    src: url('font/monserrat/monserrat.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'georgina_Light';
+    src: url('font/georgina/georgina_Light.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Moodyrock';
+    src: url('font/greataris/Moodyrock.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Moodyrock2';
+    src: url('font/greataris/Moodyrock.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'breve';
+    src: url('font/nimavisual/breve.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
