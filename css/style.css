@@ -9,9 +9,6 @@ main{
 	width: 75%;
 	margin: 90px auto;
 }
-.main-stock{
-	padding: 10px
-}
 .resaltar:hover{
 	background-color: #EBBAFD;
 }

@@ -5,12 +5,12 @@
 ?>
 		<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
-			<div class="row main-stock">
+			<div class="row">
 				<h5 style="padding: 8px 0;">Salida de Stock</h5>
-				<div class="col-12 col-sm-12 fieldset">
+				<div class="col-xl-12 col-sm-12 fieldset">
 				  	<p class="legend">Filtros</p>
 					<div class="row">
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Productos :</label>
 							<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
 								<option value="0">Seleccionar ...</option>
@@ -18,23 +18,23 @@
 								<option value="2">Llantas</option>
 							</select>
 						</div>
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Marcas :</label>
 							<select class="form-control"  id="selectMarca" onchange="buscar_modelo(this.value)"></select>
 						</div>
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Modelos :</label>
 							<select class="form-control" id="selectModelo" onchange="buscar_medida(this.value)"></select>
 						</div>
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Medidas :</label>
 							<select class="form-control" id="selectMedida" onchange="buscar_cantidad(this.value)"></select>
 						</div>
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Cantidad</label>
 							<select class="form-control" id="selectCantidad"></select>
 						</div>
-						<div class="col-12 col-sm-2 form-group">
+						<div class="col-xl-2 col-sm-2 form-group">
 							<button class="btn btn-primary btn-block" style="margin-top: 28px;" onclick="onAgregar()">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     				<path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
@@ -46,10 +46,10 @@
 					</div>
 					<!-- Linea Botones -->
 					<div class="row">		
-						<div class="col-12 col-sm-9 form-inline" style="margin-top: 12px">
+						<div class="col-xl-6 col-sm-3 form-inline" style="margin-top: 12px">
 							&nbsp;
 				    	</div>
-				    	<div class="col-12 col-sm-1 form-inline" style="margin-top: 12px">
+				    	<div class="col-xl-2 col-sm-3 form-inline" style="margin-top: 12px">
 				    		<button class="btn btn-secondary btn-block my-1 text-center" style="font-size:10px;" onclick="printDiv()">
 				    			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
@@ -59,7 +59,7 @@
 							    IMPRIMIR
 							</button>
 						</div>
-				    	<div class="col-12 col-sm-1 form-inline" style="margin-top: 12px">
+				    	<div class="col-xl-2 col-sm-3 form-inline" style="margin-top: 12px">
 				    		<button class="btn btn-danger btn-block my-1 text-center" style="font-size:10px;" onclick="location.href='salida-multiple.php'">
 				    			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								  <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
@@ -68,7 +68,7 @@
 				    			RESETEAR
 				    		</button>
 				    	</div>
-				    	<div class="col-12 col-sm-1 form-inline" style="margin-top: 12px">
+				    	<div class="col-xl-2 col-sm-3 form-inline" style="margin-top: 12px">
 				    		<button class="btn btn-success btn-block my-1 text-center" style="font-size:10px;" onclick="">
 					    		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								  <path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z"/>
@@ -80,10 +80,8 @@
 					</div>
 				</div>
 			</div>
-		</main>
-		<article class="container-fluid">
 			<div class="row">
-				<table class="col-12 col-sm-12 table" id="table">
+				<table class="col-xl-12 col-sm-12 table" id="table">
 					<thead>
 						<tr>
 							<th colspan="6">
@@ -107,10 +105,10 @@
 					<tbody id="tbody"></tbody>
 				</table>
 			</div>
-		</article>
-		<!---
+		</main>
+	<!---
 			MODAL 
-		-->
+	-->
 		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -127,9 +125,9 @@
 		    </div>
 		  </div>
 		</div>
-		<!----
+	<!----
 			FIN MODAL
-		-->
+	-->
 	</body>
 	<script>
 		function sortTable(n,type) {

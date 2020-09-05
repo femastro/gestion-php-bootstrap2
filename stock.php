@@ -11,13 +11,13 @@
 	$llantas = mysqli_query($link,$sql);
 ?>
 <main class="container-fluid">
-	<div class="row main-stock">
+	<div class="row">
 		<h5 style="padding: 8px 0;">Stock</h5>
-		<div class="col-12 col-sm-12 fieldset">
+		<div class="col-xl-12 col-sm-12 fieldset">
 		  	<p class="legend">Filtros</p>
 			<div class="row">
 				<!-- SELECTS -->
-				<div class="col-12 col-sm-3 form-group">
+				<div class="col-xl-3 col-sm-3 form-group">
 					<label for="">Productos :</label>
 					<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
 						<option value="0">Seleccionar ...</option>
@@ -25,48 +25,51 @@
 						<option value="2">Llantas</option>
 					</select>
 				</div>
-				<div class="col-12 col-sm-3 form-group">
+				<div class="col-xl-3 col-sm-3 form-group">
 					<label for="">Marcas :</label>
 					<select class="form-control"  id="selectMarca" onchange="buscar_modelo(this.value)"></select>
 				</div>
-				<div class="col-12 col-sm-3 form-group">
+				<div class="col-xl-3 col-sm-3 form-group">
 					<label for="">Modelos :</label>
 					<select class="form-control" id="selectModelo" onchange="buscar_medida(this.value)"></select>
 				</div>
-				<div class="col-12 col-sm-3 form-group">
+				<div class="col-xl-3 col-sm-3 form-group">
 					<label for="">Medidas :</label>
 					<select class="form-control" id="selectMedida" onchange="buscar_articulo(this.value)"></select>
 				</div>
 
 				<!--- Menu buscar -->
-				<div class="col-12 col-sm-3 text-center">									
-					&nbsp;
+				<div class="col-xl-10 col-sm-9" style="margin-top: 12px;">
+					<div class="row">
+						<div class="col-xl-8 col-sm-6">
+				    		<input class="form-control" type="text" placeholder="Buscar..." id="search" onkeypress="buscar(this.value)" style="width:100%;">
+							&nbsp;
+							
+						</div>
+						<div class="col-xl-2 col-sm-3">
+						   	<button class="btn btn-secondary btn-block" onclick="buscar($('#search').val())">
+						   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+								    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+								</svg>&nbsp;
+						    	Buscar
+						    </button>
+							&nbsp;
+							
+						</div>
+						<div class="col-xl-2 col-sm-3">
+							<button class="btn btn-danger btn-block" onclick="location.href='stock.php'">
+						   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								  	<path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+									<path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+								</svg>&nbsp;
+						    	Limpiar
+						    </button>
+							
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-3" style="margin-top: 12px;">
-				    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." id="search" onkeypress="buscar(this.value)" style="width:100%;">
-		    	</div>
-				<div class="col-12 col-sm-1 text-center" style="margin-top: 12px;">									
-				   	<button class="btn btn-block btn-secondary" onclick="buscar($('#search').val())">
-				   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-						    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-						</svg>&nbsp;
-				    	Buscar
-				    </button>
-				</div>
-				<div class="col-12 col-sm-1 text-center" style="margin-top: 12px;">
-					<button class="btn btn-block btn-danger" onclick="location.href='stock.php'">
-				   		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-						  	<path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
-							<path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
-						</svg>&nbsp;
-				    	Limpiar
-				    </button>
-				</div>
-				<div class="col-12 col-sm-3 text-center">									
-					&nbsp;
-				</div>
-				<div class="col-12 col-sm-1">
+				<div class="col-xl-2 col-sm-3">
 					<button class="btn btn-link btn-block" style="font-size:12px;margin-top: 12px">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 						    <path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z"/>
@@ -79,29 +82,29 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
+<!--
+	GRILLA de NEUMATICOS
+-->
 	<div class="row">
-		<table class="col-12 col-sm-12 table" id="table1">
+		<table class="col-xl-12 col-sm-12 table" id="table1">
 			<thead>
 				<tr>
 					<td colspan="6"><h3 id="tipo1">NEUMATICOS :</h3></td>
 					<td colspan="1" class="hidden-print">
-						<button class="btn btn-success text-center" style="font-size:10px;" onclick="tableToExcel('table1', 'Listado')">
+						<button class="btn btn-success btn-block text-center" style="font-size:10px;" onclick="tableToExcel('table1', 'Listado')">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-spreadsheet" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M5 9H3V8h10v1h-3v2h3v1h-3v2H9v-2H6v2H5v-2H3v-1h2V9zm1 0v2h3V9H6z"/>
 								<path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								<path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-							</svg>
-							CREAR EXCEL
+							</svg>&nbsp;EXCEL
 						</button>
 					<td coslpan="1" class="hidden-print">
-						<button class="btn btn-secondary text-center" style="font-size:10px;" onclick="printTable(1)">
+						<button class="btn btn-secondary btn-block text-center" style="font-size:10px;" onclick="printTable(1)">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							    <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
 							    <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z"/>
 							    <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-							</svg>
-							IMPRIMIR
+							</svg>&nbsp;IMPRIMIR
 						</button>
 					</td>
 				</tr>
@@ -170,29 +173,32 @@
 				?>
 			</tbody>
 		</table>
-		<table class="table" id="table2">
+	</div>
+<!-- 
+	GRILLA de LLANTAS 
+-->
+	<div class="row">
+		<table class="col-xl-12 col-sm-12 table" id="table2">
 			<thead>
 				<tr>
 					<td colspan="6"><h3 id="tipo2">LLANTAS :</h3></td>
 					<td colspan="1" class="hidden-print">
-						<button class="btn btn-success" style="font-size:10px;" onclick="tableToExcel('table2', 'Listado')">
+						<button class="btn btn-success btn-block text-center" style="font-size:10px;" onclick="tableToExcel('table2', 'Listado')">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-spreadsheet" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M5 9H3V8h10v1h-3v2h3v1h-3v2H9v-2H6v2H5v-2H3v-1h2V9zm1 0v2h3V9H6z"/>
 								<path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								<path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-							</svg>
-							&nbsp;CREAR EXCEL
+							</svg>&nbsp;EXCEL
 						</button>
 					</td>
 					<td colspan="1" class="hidden-print">
-						<button class="btn btn-secondary" style="font-size:10px;" onclick="printTable(2)">
+						<button class="btn btn-secondary btn-block text-center" style="font-size:10px;" onclick="printTable(2)">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-printer" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							    <path d="M11 2H5a1 1 0 0 0-1 1v2H3V3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2h-1V3a1 1 0 0 0-1-1zm3 4H2a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h1v1H2a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1z"/>
 							    <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM5 8a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H5z"/>
 							    <path d="M3 7.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
-							</svg>
-							&nbsp;IMPRIMIR
-						</button>&nbsp;&nbsp;
+							</svg>&nbsp;IMPRIMIR
+						</button>
 					</td>
 				</tr>
 				<tr>
@@ -262,7 +268,7 @@
 			</tbody>
 		</table>
 	</div>
-	</div>
+</main>
 	<!---
 		MODAL VER ARTICULO 
 	-->
@@ -348,7 +354,6 @@
 	<!--
 		FIN MODAL
 	-->
-</main>
 <script>
 ///
 /// FUNCTION 
