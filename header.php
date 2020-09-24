@@ -1,35 +1,35 @@
 <?php
-// Máxima duración de sesión activa en hora
-define( 'MAX_SESSION_TIEMPO', 3600 * 1 );
+	// Máxima duración de sesión activa en hora
+	define( 'MAX_SESSION_TIEMPO', 3600 * 1 );
 
-// Controla cuando se ha creado y cuando tiempo ha recorrido 
-if ( isset( $_SESSION[ 'ULTIMA_ACTIVIDAD' ] ) && 
-     ( time() - $_SESSION[ 'ULTIMA_ACTIVIDAD' ] > MAX_SESSION_TIEMPO ) ) {
+	// Controla cuando se ha creado y cuando tiempo ha recorrido 
+	if ( isset( $_SESSION[ 'ULTIMA_ACTIVIDAD' ] ) && 
+	     ( time() - $_SESSION[ 'ULTIMA_ACTIVIDAD' ] > MAX_SESSION_TIEMPO ) ) {
 
-    // Si ha pasado el tiempo sobre el limite destruye la session
-    destruir_session();
-}
+	    // Si ha pasado el tiempo sobre el limite destruye la session
+	    destruir_session();
+	}
 
-$_SESSION[ 'ULTIMA_ACTIVIDAD' ] = time();
+	$_SESSION[ 'ULTIMA_ACTIVIDAD' ] = time();
 
-// Función para destruir y resetear los parámetros de sesión
-function destruir_session() {
+	// Función para destruir y resetear los parámetros de sesión
+	function destruir_session() {
 
-    $_SESSION = array();
-    if ( ini_get( 'session.use_cookies' ) ) {
-        $params = session_get_cookie_params();
-        setcookie(
-            session_name(),
-            '',
-            time() - MAX_SESSION_TIEMPO,
-            $params[ 'path' ],
-            $params[ 'domain' ],
-            $params[ 'secure' ],
-            $params[ 'httponly' ] );
-    }
+	    $_SESSION = array();
+	    if ( ini_get( 'session.use_cookies' ) ) {
+	        $params = session_get_cookie_params();
+	        setcookie(
+	            session_name(),
+	            '',
+	            time() - MAX_SESSION_TIEMPO,
+	            $params[ 'path' ],
+	            $params[ 'domain' ],
+	            $params[ 'secure' ],
+	            $params[ 'httponly' ] );
+	    }
 
-    @session_destroy();
-}
+	    @session_destroy();
+	}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -117,21 +117,19 @@ function destruir_session() {
 				    	if (!empty($_SESSION['login'])){
 				    ?>
 						    <ul class="navbar-nav mr-right">
+						    <!--
 							  	<li class="nav-item text-right" style="color:white;font-size:12px">
 							     	<script>
 							      		$(document).ready(function(){
-								       		var userName = getUser();
-								       		function getUser(){
-								       			const user = sessionStorage.getItem('user');
-								       			return user;
-								       		}
-								       		$('#user').html(userName);
+								       		var user = sessionStorage.getItem('user');
+								       		$('#user').html(user);
 							     		});
 							        </script>
 							    	<p style="position: relative;top:12px">&nbsp;&nbsp;Bienvenido :&nbsp;
 							        	<span id="user"></span>
 							        </p>
 							    </li>
+							-->
 							    <li class="nav-item">
 							        <span style="position: relative;top:12px">&nbsp;&nbsp;//&nbsp;&nbsp;</span>
 							    </li>

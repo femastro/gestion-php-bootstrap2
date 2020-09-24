@@ -1,6 +1,6 @@
 <main class="container">
 	<div class="row">
-		<div class="col-xl-12 col-sm-7" style="margin: 20px auto">
+		<div class="col-12 col-sm-5 col-lg-5 col-xl-5" style="margin: 20px auto">
 			<div class="card">
 				<div class="card-header">
 					<h4 class="text-center">LOGIN</h4>

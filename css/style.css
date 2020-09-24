@@ -11,6 +11,7 @@ main{
 }
 .resaltar:hover{
 	background-color: #EBBAFD;
+	font-weight: bold;
 }
 #hidden{
 	display: none;

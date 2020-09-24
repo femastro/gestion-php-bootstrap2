@@ -1,5 +1,5 @@
 <?php 
-	session_start();
+	require "init.php";
 	if (empty($_SESSION['login'])) {
 		header('Location:index.php');
 	}

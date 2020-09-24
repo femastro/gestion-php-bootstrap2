@@ -6,8 +6,7 @@
 		<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
-				<h5 style="padding: 8px 0;">Salida de Stock</h5>
-				<div class="col-xl-12 col-sm-12 fieldset">
+				<div class="mt-3 col-xl-12 col-sm-12 fieldset">
 				  	<p class="legend">Filtros</p>
 					<div class="row">
 						<div class="col-xl-2 col-sm-2 form-group">
@@ -35,7 +34,7 @@
 							<select class="form-control" id="selectCantidad"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<button class="btn btn-primary btn-block" style="margin-top: 28px;" onclick="onAgregar()">
+							<button class="btn btn-primary btn-block" style="margin-top: 28px;font-size:12px;" onclick="onAgregar()">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     				<path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 									<path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
@@ -85,7 +84,7 @@
 					<thead>
 						<tr>
 							<th colspan="6">
-								<h4>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h4>		 	
+								<h6>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h6>
 							</th>
 						</tr>
 						<tr>

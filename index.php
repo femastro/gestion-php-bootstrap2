@@ -1,5 +1,5 @@
 <?php 
-	session_start();
+	require "init.php";
 	require "header.php";
 	if (empty($_SESSION['login'])) {
 		require "login.php";

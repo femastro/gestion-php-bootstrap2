@@ -89,7 +89,7 @@
 		<table class="col-xl-12 col-sm-12 table" id="table1">
 			<thead>
 				<tr>
-					<td colspan="6"><h3 id="tipo1">NEUMATICOS :</h3></td>
+					<td colspan="6"><h5 id="tipo1">NEUMATICOS :</h5></td>
 					<td colspan="1" class="hidden-print">
 						<button class="btn btn-success btn-block text-center" style="font-size:10px;" onclick="tableToExcel('table1', 'Listado')">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-spreadsheet" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -181,7 +181,7 @@
 		<table class="col-xl-12 col-sm-12 table" id="table2">
 			<thead>
 				<tr>
-					<td colspan="6"><h3 id="tipo2">LLANTAS :</h3></td>
+					<td colspan="6"><h5 id="tipo2">LLANTAS :</h5></td>
 					<td colspan="1" class="hidden-print">
 						<button class="btn btn-success btn-block text-center" style="font-size:10px;" onclick="tableToExcel('table2', 'Listado')">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-spreadsheet" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

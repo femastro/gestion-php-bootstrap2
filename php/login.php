@@ -1,5 +1,6 @@
 <?php 
 	session_start();
+
 	$username = $_POST['username'];
 	$password = md5($_POST['password']);
 	$local = $_POST['local'];
@@ -16,12 +17,12 @@
 
 	if ($cont == 1) {
 		$_SESSION['login'] = 1;
+		$_SESSION['local'] = $local;
 ?>
 	<script>
 		function addItem(user,role,local){
 			sessionStorage.setItem("user",user);
 			sessionStorage.setItem('role',role);
-			sessionStorage.setItem("local",local);
 		}
 
 		addItem('<?php echo $user['usuario'] ?>','<?php echo $user['role'] ?>','<?php echo $local ?>');

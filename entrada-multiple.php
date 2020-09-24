@@ -6,8 +6,7 @@
 <!DOCTYPE html>
 		<main class="container-fluid">
 			<div class="row">
-				<h5 style="padding: 8px 0;">Entrada de Stock</h5>
-				<div class="col-xl-12 col-sm-12 fieldset">
+				<div class="mt-3 col-xl-12 col-sm-12 fieldset">
 					<p class="legend">Filtros</p>
 					<div class="row">
 						<div class="col-xl-2 col-sm-2 form-group">
@@ -43,7 +42,7 @@
 							</select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<button class="btn btn-primary btn-block" style="margin-top: 26px;" onclick="onAgregar()">
+							<button class="btn btn-primary btn-block" style="margin-top: 28px;font-size:12px;" onclick="onAgregar()">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 									<path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
@@ -86,7 +85,7 @@
 							</button>
 				    	</div>
 				    	<div class="col-xl-2 col-sm-3 form-inline" style="margin-top: 12px">
-				    		<button class="btn btn-success btn-block my-1" style="font-size:10px;" onclick="">
+				    		<button class="btn btn-success btn-block my-1" style="font-size:10px;" onclick="procesar()" disabled="disabled" id="procesar">
 					    		<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" d="M2 5v7.5c0 .864.642 1.5 1.357 1.5h9.286c.715 0 1.357-.636 1.357-1.5V5h1v7.5c0 1.345-1.021 2.5-2.357 2.5H3.357C2.021 15 1 13.845 1 12.5V5h1z"/>
 									<path fill-rule="evenodd" d="M5.5 7.5A.5.5 0 0 1 6 7h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5zM15 2H1v2h14V2zM1 1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H1z"/>
@@ -102,7 +101,7 @@
 					<thead>
 						<tr>
 							<th colspan="6">
-								<h4>REGISTRO de ENTRADA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h4>		 	
+								<h6>REGISTRO de ENTRADA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h6>
 							</th>
 						</tr>
 						<tr>
@@ -147,6 +146,62 @@
 			-->
 	</body>
 	<script>
+		function procesar() {
+			var $table = $("table"),
+			rows = [],
+			header = [];
+
+			$table.find("thead th").each(function () {
+			    header.push($(this).html());
+			});
+
+			$('.hidden-print').addClass('hidden');
+
+			$table.find("tbody tr").each(function () {
+
+			    var row = {};
+			    var key, value;
+
+			    $(this).find("td").each(function (i) {
+				    
+				    key = header[i+1];
+				    value = $(this).html();
+					row[key] = value;
+
+			    });
+			    rows.push(row);
+			});
+
+			var mensaje = "Desea imprimir el listado ?";
+			var procesar = "ACEPTAR para procesar la salida de productos !.";
+
+			if (confirm(procesar)) {
+
+				if (confirm(mensaje)) {
+					printDiv();
+				}
+				$.ajax({
+					type: 'POST',
+			
+					data: {'json':rows},
+					url: 'php/alta.php',
+					cache: false,
+					success: function(data){
+						console.log("Respuesta -> ",data);	
+					}
+				});
+				$("#tbody").html('');
+
+			}else{
+
+				alert('No Confirmo el Proceso');
+				$('.hidden-print').removeClass('hidden');
+
+			}
+
+		}
+
+
 		function sortTable(n,type) {
 			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 			 
@@ -268,6 +323,7 @@
 
 
 		function onAgregar(){
+			$('#procesar').prop('disabled','');
 			var tbody = document.getElementById('tbody').innerHTML;
 			var producto = $('#tipo-producto').val();
 			var marca = $('#selectMarca').val();
@@ -283,7 +339,6 @@
 					cache: false,
 					success: function(data){
 						if (data) {
-							$('#tody ').html(tbody);
 							$('#tbody ').append(data);
 							$('#tipo-producto').val(0);
 							$('#selectMarca').html('');

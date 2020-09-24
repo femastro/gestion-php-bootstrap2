@@ -1,6 +1,0 @@
-[07-Aug-2020 16:51:57 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-medida.php on line 17
-[07-Aug-2020 16:51:57 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-modelo.php on line 17
-[07-Aug-2020 16:51:57 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-marca.php on line 17
-[16-Aug-2020 13:42:58 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-marca.php on line 23
-[16-Aug-2020 13:42:58 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-modelo.php on line 23
-[16-Aug-2020 13:42:58 UTC] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, boolean given in /home2/brown/public_html/trabajos/gestion/php/buscar-medida.php on line 23
