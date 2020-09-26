@@ -1,11 +1,13 @@
 <?php
 	require "../conexion.php";
 
-	$params = $_POST['json'];
+	$params = $_POST['json']; /// recibe JSON 
 
-	$cont = count($params);
+	$cont = count($params); ///// Contador de Datos del JSON
 
 	$i = 0;
+
+	$nuevoStock = 0;
 
 	while ($cont > $i){
 
@@ -15,16 +17,18 @@
 		$medida = $params[$i]['Medida'];
 		$cantidad = $params[$i]['Cantidad'];
 		
-		$producto = substr($codigo,0,1); // extrae el primer caracter N ó L para saber que tabla usar.
+		$producto = substr($codigo,0,1); // Extrae el primer caracter N ó L para saber que tabla usar.
 
 		if ($producto == "N"){
-			$tabla = 'neumaticos';
+			$tabla = 'stockneumaticos';
 		}
 		if ($producto == "L"){
-			$tabla = 'llantas';
+			$tabla = 'stockllantas';
 		}
 
-		$sql = "SELECT cantidad FROM stock".$tabla." WHERE cod_Articulo ='".$codigo."' AND marca ='".$marca."' AND modelo ='".$modelo."'";
+		/// BUSCA SI EXISTE EN STOCK !!!
+
+		$sql = "SELECT cantidad FROM ".$tabla." WHERE cod_Articulo ='".$codigo."' AND marca ='".$marca."' AND modelo ='".$modelo."'";
 
 		$resultado = mysqli_query($link,$sql) or die(mysqli_error($link));
 
@@ -40,7 +44,7 @@
 			
 		}else{
 			
-			altaNueva($codigo,$marca,$modelo,$medida,$cantidad);
+			altaNueva($codigo,$marca,$modelo,$medida,$cantidad,$tabla);
 			
 			altaUbicacion($codido,$cantidad);
 			
@@ -48,17 +52,21 @@
 		
 		$i++;
 	};
+	
+	////	
+	//// ACTUALIZACION de STOCK !!!!
+	
+	function actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla) 
+	{		
+		$nuevoStock = $cantidad + $stock; /// Error ? =: syntax error, unexpected ';' on this line.
 		
-
-	actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla)
-	{
-		$nuevoStock = $cantidad + $stock;
-
 		$sql = "UPDATE ".$tabla." SET cantidad='".$nuevoStock."' WHERE cod_Articulo ='".$codigo."' AND marca ='".$marca."' AND modelo ='".$modelo."'";
 
 		mysqli_query($link,$sql) or die(mysqli_error($link));
 
 		$x = 0;
+
+		// Busca stock en ubicacion
 
 		$sql = "SELECT cantidad FROM ubicacion WHERE codigo ='".$codigo."' AND ubicacion = ".$_SESSION['local'];
 
@@ -66,9 +74,13 @@
 
 		$row = mysqli_fetch_assoc($resultado);
 
+		/// suma el ingreso nuevo al stock de ubicacion
+
 		$localStock = $row['cantidad'] + $cantidad;
 
-		$sql = "UPDATE ubicacion SET cantidad = ".$localStock." WHERE codigo ='".$codigo."'";
+		$sql = "UPDATE ubicacion SET cantidad = ".$localStock." WHERE codigo ='".$codigo."' AND ubicacion = ".$_SESSION['local'];
+
+		// actualiza la ubicacion
 
 		mysqli_query($link,$sql) or die(mysqli_error($link));
 
@@ -76,16 +88,24 @@
 
 	};
 
-	altaNueva($codigo,$marca,$modelo,$medida,$cantidad)
+
+////
+//// ALTA NUEVO PRODUCTO !!!
+
+	function altaNueva($codigo,$marca,$modelo,$medida,$cantidad,$tabla)
 	{
 
-		$sql = "INSERT INTO stock".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."','xxx',".$cantidad.",0,0,null,0,".$_SESSION['local'].")";
+		$sql = "INSERT INTO ".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."','XXX',".$cantidad.",0,0,null,0,".$_SESSION['local'].")";
 		
 		mysqli_query($link,$sql) or die(mysqli_error($link));
 
 	};
 
-	altaUbicacion($codigo,$cantidad)
+
+////
+//// ALTA NUEVA UBICACION DE PRODUCTO. 
+
+	function altaUbicacion($codigo,$cantidad)
 	{
 		$x = 0;
 
@@ -104,5 +124,8 @@
 		};
 
 	};
+
+
+
 	mysqli_close($link);
  ?>

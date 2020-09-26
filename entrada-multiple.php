@@ -182,7 +182,6 @@
 				}
 				$.ajax({
 					type: 'POST',
-			
 					data: {'json':rows},
 					url: 'php/alta.php',
 					cache: false,
@@ -194,7 +193,7 @@
 
 			}else{
 
-				alert('No Confirmo el Proceso');
+				alert('No se confirmo el proceso');
 				$('.hidden-print').removeClass('hidden');
 
 			}
