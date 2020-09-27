@@ -129,6 +129,60 @@
 	-->
 	</body>
 	<script>
+		function procesar() {
+			var $table = $("table"),
+			rows = [],
+			header = [];
+
+			$table.find("thead th").each(function () {
+			    header.push($(this).html());
+			});
+
+			$('.hidden-print').addClass('hidden');
+
+			$table.find("tbody tr").each(function () {
+
+			    var row = {};
+			    var key, value;
+
+			    $(this).find("td").each(function (i) {
+				    
+				    key = header[i+1];
+				    value = $(this).html();
+					row[key] = value;
+
+			    });
+			    rows.push(row);
+			});
+
+			var mensaje = "Desea imprimir el listado ?";
+			var procesar = "ACEPTAR para procesar la salida de productos !.";
+
+			if (confirm(procesar)) {
+
+				if (confirm(mensaje)) {
+					printDiv();
+				}
+				$.ajax({
+					type: 'POST',
+					data: {'json':rows},
+					url: 'php/salida.php',
+					cache: false,
+					success: function(data){
+						console.log("Respuesta -> ",data);	
+					}
+				});
+				$("#tbody").html('');
+
+			}else{
+
+				alert('No se confirmo el proceso');
+				$('.hidden-print').removeClass('hidden');
+
+			}
+
+		}
+
 		function sortTable(n,type) {
 			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 				 

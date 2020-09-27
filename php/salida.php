@@ -49,16 +49,8 @@
 
 			echo 1;
 			
-		}else{
-			
-			altaNueva($codigo,$marca,$modelo,$medida,$cantidad,$tabla,$link,$local);
-			
-			altaUbicacion($codido,$cantidad,$local,$link);
-
-			echo 2;
-			
-		};
-		
+        }
+        
 		$i++;
 	};
 	
@@ -68,7 +60,7 @@
 	function actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla,$link,$local) 
 	{
 		
-		$nuevoStock = $stock + $cantidad; /// Error ? =: syntax error, unexpected ';' on this line.
+		$nuevoStock = $stock - $cantidad; /// Error ? =: syntax error, unexpected ';' on this line.
 		
 		$sql = "UPDATE ".$tabla." SET cantidad='".$nuevoStock."' WHERE cod_Articulo ='".$codigo."' AND marca ='".$marca."' AND modelo ='".$modelo."'";
 
@@ -89,49 +81,12 @@
 		/// suma el ingreso nuevo al stock de ubicacion
 		$stockAnterior = $row['cantidad'];
 
-		$stockActual = $stockAnterior + $cantidad;
+		$stockActual = $stockAnterior - $cantidad;
 
 		$sql = "UPDATE ubicacion SET cantidad = ".$stockActual." WHERE codigo ='".$codigo."' AND ubicacion = ".$local;
 
 		// actualiza la ubicacion
 		mysqli_query($link,$sql) or die(mysqli_error($link));
-
-	};
-
-
-////
-//// ALTA NUEVO PRODUCTO !!!
-
-	function altaNueva($codigo,$marca,$modelo,$medida,$cantidad,$tabla,$link,$local)
-	{
-
-		$sql = "INSERT INTO ".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."','XXX',".$cantidad.",0,0,null,0,".$local.")";
-		
-		mysqli_query($link,$sql) or die(mysqli_error($link));
-
-	};
-
-
-////
-//// ALTA NUEVA UBICACION DE PRODUCTO. 
-
-	function altaUbicacion($codigo,$cantidad,$link,$local)
-	{
-		$x = 0;
-
-		while ($x < 2){
-			
-			if ($x != $local) {
-				$cantidad = 0;
-			}
-
-			$sql = "INSERT INTO ubicacion VALUES (null,'".$codigo."',".$cantidad.",".$x.")";
-			
-			mysqli_query($link,$sql) or die(mysqli_error($link));
-			
-			$x++;
-
-		};
 
 	};
 

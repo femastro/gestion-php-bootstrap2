@@ -173,7 +173,7 @@
 			});
 
 			var mensaje = "Desea imprimir el listado ?";
-			var procesar = "ACEPTAR para procesar la salida de productos !.";
+			var procesar = "ACEPTAR para procesar la Entrada de productos !.";
 
 			if (confirm(procesar)) {
 
