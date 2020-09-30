@@ -18,11 +18,11 @@
 
 	$sql = "SELECT DISTINCT(medida) AS dato FROM ".$tabla;
 
-	if ($_POST['marca']) > 2 || strlen($_POST['modelo']) > 2){
+	if (strlen($_POST['marca']) > 2 || strlen($_POST['modelo']) > 2){
 		$sql .= " WHERE";
 	}
 
-	if ($_POST['marca']) > 2){
+	if (strlen($_POST['marca']) > 2){
 		$marca = $_POST['marca'];
 		$sql .= " marca = '".$marca."'";
 	}
@@ -47,6 +47,5 @@
 		<option value="<?php echo $row['dato'] ?>"><?php echo $row['dato'] ?></option>
 <?php
 	}
-
 	mysqli_close($link);
 ?>
