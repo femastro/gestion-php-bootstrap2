@@ -147,17 +147,18 @@
 	</body>
 	<script>
 		function procesar() {
-			var $table = $("table"),
+			$('.hidden-print').remove();
+			
+			var table = $("#table"),
+
 			rows = [],
 			header = [];
 
-			$table.find("thead th").each(function () {
+			table.find("thead th").each(function () {
 			    header.push($(this).html());
 			});
 
-			$('.hidden-print').addClass('hidden');
-
-			$table.find("tbody tr").each(function () {
+			table.find("tbody tr").each(function () {
 
 			    var row = {};
 			    var key, value;
@@ -186,10 +187,11 @@
 					url: 'php/alta.php',
 					cache: false,
 					success: function(data){
-						console.log("Respuesta -> ",data);	
+						console.log("Respuesta -> ",data);
+						window.alert("PROCESO REALIZADO CON EXITO !");
 					}
 				});
-				$("#tbody").html('');
+				location.href="entrada-multiple.php";
 
 			}else{
 

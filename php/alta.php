@@ -6,12 +6,12 @@
 	$params = $_POST['json']; /// recibe JSON 
 
 	$local = $_SESSION['local']; /// Captura en que local-sucursal esta el usuario.
-	
-	$i = 0;
-	$cont = count($params) - 1 ;
-	///// Contador de Datos del JSON . esta asi porque devuelve +1 y el array empieza en 0 y si son 2 seria [0],[1].
 
-	while ($i <= $cont){ 
+	$i = 0;
+	$cont = count($params) ;
+	///// Contador de Datos del JSON .
+
+	while ($i < $cont){ 
 		// No se ejecuta el loop- solo una vez y en el caso de que sean mas de 1, solo procesa el primer registro.
 		// en el array pueden llegar mas de un registro formato ( json / array ).
 
@@ -19,7 +19,7 @@
 		$marca = $params[$i]['Marca'];
 		$modelo = $params[$i]['Modelo'];
 		$medida = $params[$i]['Medida'];
-		$cantidad = $params[$i]['Cantidad'];
+		$cantidad = intval($params[$i]['Cantidad']);
 		
 		$cadena = substr($codigo,0,1); // Extrae el primer caracter N ó L para saber que tabla usar.
 
