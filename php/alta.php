@@ -8,10 +8,10 @@
 	$local = $_SESSION['local']; /// Captura en que local-sucursal esta el usuario.
 
 	$i = 0;
-	$cont = count($params) ;
+	$contador = count($params);
 	///// Contador de Datos del JSON .
 
-	while ($i < $cont){ 
+	while ($i < $contador){ 
 		// No se ejecuta el loop- solo una vez y en el caso de que sean mas de 1, solo procesa el primer registro.
 		// en el array pueden llegar mas de un registro formato ( json / array ).
 
@@ -44,7 +44,7 @@
 
 			$stock = $row['cantidad']; 
 			
-			actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla,$link,$local);
+			actualizarAlta($codigo,$marca,$modelo,$cantidad,$stock,$tabla,$link,$local);
 
 			actualizarUbicacion($codigo,$cantidad,$local,$link);
 			
@@ -101,7 +101,7 @@
 		////	
 		//// ACTUALIZACION de STOCK !!!!
 		
-		function actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla,$link,$local) 
+		function actualizarAlta($codigo,$marca,$modelo,$cantidad,$stock,$tabla,$link,$local) 
 		{
 			
 			$nuevoStock = $stock + $cantidad; /// Error ? =: syntax error, unexpected ';' on this line.

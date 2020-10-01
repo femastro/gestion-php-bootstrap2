@@ -5,28 +5,28 @@
 
 	$params = $_POST['json']; /// recibe JSON 
 
-	$cont = count($params); ///// Contador de Datos del JSON
-
-	$local = $_SESSION['local']; /// Captura en que local estamos.
+	$local = $_SESSION['local']; /// Captura en que local-sucursal esta el usuario.
 
 	$i = 0;
+	$contador = count($params);
+	///// Contador de Datos del JSON .
 
-	$nuevoStock = 0;
-
-	while ($cont > $i){
+	while ($i < $contador){ 
+		// No se ejecuta el loop- solo una vez y en el caso de que sean mas de 1, solo procesa el primer registro.
+		// en el array pueden llegar mas de un registro formato ( json / array ).
 
 		$codigo = $params[$i]['Codigo'];
 		$marca = $params[$i]['Marca'];
 		$modelo = $params[$i]['Modelo'];
 		$medida = $params[$i]['Medida'];
-		$cantidad = $params[$i]['Cantidad'];
+		$cantidad = intval($params[$i]['Cantidad']);
 		
-		$producto = substr($codigo,0,1); // Extrae el primer caracter N ó L para saber que tabla usar.
+		$cadena = substr($codigo,0,1); // Extrae el primer caracter N ó L para saber que tabla usar.
 
-		if ($producto == "N"){
+		if ($cadena == "N"){
 			$tabla = 'stockneumaticos';
 		}
-		if ($producto == "L"){
+		if ($cadena == "L"){
 			$tabla = 'stockllantas';
 		}
 
