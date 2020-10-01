@@ -115,12 +115,12 @@
 					<th width="20%" onclick="sortTable(3,'str',1)" class="sort">Modelo</th>
 					<th width="20%" onclick="sortTable(4,'str',1)" class="sort">Medida</th>
 					<th width="5%" onclick="sortTable(5,'int',1)" class="sort">Stock</th>
-					<th width="12%" class="hidden-print">
+					<th width="12%" class="hidden-print text-center">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							  <path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 							  <path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
 						</svg>&nbsp;
-						<a href="#" data-toggle="modal" data-target="#ModalEntrada">Entrada</a>
+						<a href="entrada-multiple.php">Entrada</a>
 					</th>
 					<th width="15%" class="text-center hidden-print">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-display" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +143,7 @@
 						<td width="20%"><?php echo $row['modelo'] ?></td>
 						<td width="20%"><?php echo $row['medida'] ?></td>
 						<td width="5%"><?php echo $row['cantidad'] ?></td>
-						<td width="12%" class="hidden-print">
+						<td width="12%" class="hidden-print text-center">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
@@ -208,12 +208,12 @@
 					<th width="20%" onclick="sortTable(3,'str',2)" class="sort">Modelo</th>
 					<th width="20%" onclick="sortTable(4,'str',2)" class="sort">Medida</th>
 					<th width="5%" onclick="sortTable(5,'int',2)" class="sort">Stock</th>
-					<th width="12%" class="hidden-print">
+					<th width="12%" class="hidden-print text-center">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							  <path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 							  <path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
 						</svg>&nbsp;
-						<a href="#" data-toggle="modalEntrada" data-target="#ModalEntrada">Entrada</a>
+						<a href="entrada-multiple.php">Entrada</a>
 					</th>
 					<th width="15%" class="text-center hidden-print">
 						<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-display" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -236,7 +236,7 @@
 						<td width="20%"><?php echo $row['modelo'] ?></td>
 						<td width="20%"><?php echo $row['medida'] ?></td>
 						<td width="5%"><?php echo $row['cantidad'] ?></td>
-						<td width="12%" class="hidden-print">
+						<td width="12%" class="hidden-print text-center">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
@@ -293,60 +293,6 @@
 	      </div>
 	      <div class="modal-footer">
 	        	<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-	<!----
-		FIN MODAL
-
-		MODAL ENTRADA
-	-->
-	<div class="modal fade" id="ModalEntrada" tabindex="-1" role="dialog" aria-labelledby="ModalLabelEntrada" aria-hidden="true" style="width: 100%">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content" style="width: 100%;">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="ModalLabelEntrada">INGRESO de ARTICULO</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-				<?php require 'nuevo-ingreso-articulo.php' ?>
-	      </div>
-	      <div class="modal-footer">
-				<button type="button" class="btn btn-primary" class="btn-ver btn btn-primary"  data-dismiss="modal" data-toggle="modal" data-target="#ModalNewEntrada">Nuevo Articulo</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="button" class="btn btn-secondary">Guardar</button>&nbsp;&nbsp;
-			    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	  <script>
-	  	$('.modal-body').ready(function(){
-
-	  	});
-	  </script>
-	</div>
-	<!----
-		FIN MODAL
-
-		MODAL NUEVO ENTRADA
-	-->
-	<div class="modal fade" id="ModalNewEntrada" tabindex="-1" role="dialog" aria-labelledby="ModalLabelNewEntrada" aria-hidden="true" style="width: 90%">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content" style="width: 130%;">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="ModalLabelNewEntrada">NUEVO INGRESO de ARTICULO</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-				<?php require 'nuevo-articulo-entrada.php' ?>
-	      </div>
-	      <div class="modal-footer">
-				<button type="button" class="btn btn-secondary">Guardar</button>&nbsp;&nbsp;
-			    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
 	  </div>

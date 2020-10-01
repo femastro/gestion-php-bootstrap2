@@ -53,7 +53,7 @@
 					</div>
 					<div class="row">
 						<div class="col-xl-2 col-sm-2 form-inline" style="margin-top: 12px">
-				    		<button class="btn btn-primary btn-block my-1" style="font-size:10px;" onclick="">
+				    		<button class="btn btn-primary btn-block my-1" style="font-size:10px;" onclick="nuevo_ingreso()">
 				    			<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								  	<path d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z"/>
 								  	<path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z"/>
@@ -146,6 +146,10 @@
 			-->
 	</body>
 	<script>
+		function nuevo_ingreso(){
+			location.href="nuevo-articulo.php";
+		}
+
 		function procesar() {
 			$('.hidden-print').remove();
 			
@@ -187,7 +191,6 @@
 					url: 'php/alta.php',
 					cache: false,
 					success: function(data){
-						console.log("Respuesta -> ",data);
 						window.alert("PROCESO REALIZADO CON EXITO !");
 					}
 				});

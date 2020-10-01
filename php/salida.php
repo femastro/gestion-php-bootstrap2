@@ -46,8 +46,6 @@
 			actualizarAlta($codigo,$marca,$modelo,$medida,$cantidad,$stock,$tabla,$link,$local);
 
 			actualizarUbicacion($codigo,$cantidad,$local,$link);
-
-			echo 1;
 			
         }
         

@@ -23,6 +23,7 @@
 		function addItem(user,role,local){
 			sessionStorage.setItem("user",user);
 			sessionStorage.setItem('role',role);
+			sessionStorage.setItem('local',local);
 		}
 
 		addItem('<?php echo $user['usuario'] ?>','<?php echo $user['role'] ?>','<?php echo $local ?>');
