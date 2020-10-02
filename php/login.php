@@ -7,7 +7,7 @@
 	
 	require "../conexion.php";
 
-	$sql = "SELECT usuario, privilegios AS role FROM usuarios WHERE usuario='".$username."' AND password='".$password."'";
+	$sql = "SELECT idusuarios, usuario, privilegios AS role FROM usuarios WHERE usuario='".$username."' AND password='".$password."'";
 
 	$resp = mysqli_query($link,$sql) or die(mysqli_error($link));
 
@@ -18,6 +18,7 @@
 	if ($cont == 1) {
 		$_SESSION['login'] = 1;
 		$_SESSION['local'] = $local;
+		$_SESSION['iduser'] = $user['idusuarios'];
 ?>
 	<script>
 		function addItem(user,role,local){

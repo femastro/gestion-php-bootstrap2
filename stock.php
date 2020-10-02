@@ -12,8 +12,8 @@
 ?>
 <main class="container-fluid">
 	<div class="row">
-		<h5 style="padding: 8px 0;">Stock</h5>
-		<div class="col-xl-12 col-sm-12 fieldset">
+		<h5 class="mt-2">Stock</h5>
+		<div class="col-xl-12 col-sm-12 fieldset mt-2">
 		  	<p class="legend">Filtros</p>
 			<div class="row">
 				<!-- SELECTS -->

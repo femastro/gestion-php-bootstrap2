@@ -6,7 +6,8 @@
 	<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
-				<div class="mt-3 col-xl-12 col-sm-12 fieldset">
+				<h5 class="mt-2">Entradas</h5>
+				<div class="mt-2 col-xl-12 col-sm-12 fieldset">
 					<p class="legend">Filtros</p>
 					<div class="row">
 						<div class="col-xl-2 col-sm-2 form-group">
