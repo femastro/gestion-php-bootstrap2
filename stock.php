@@ -310,9 +310,9 @@
 	    var divToPrint = document.getElementById('table'+table);
 	    newWin = window.open("", 'PRINT', 'height=600,width=960,top=100,left=410,resizable=0');
 	    if (table == 1) {
-	    	newWin.document.write('<style>#table1{width:98%;margin:auto;font-size:13px}th{border:thin solid black}td{border:thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
+	    	newWin.document.write('<style>#table1{width:98%;margin:auto;font-size:12px}th{border:thin solid black}td{border:thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
 	    }else{
-	    	newWin.document.write('<style>#table2{width:98%;margin:auto;font-size:13px}th{border:thin solid black}td{border:thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
+	    	newWin.document.write('<style>#table2{width:98%;margin:auto;font-size:12px}th{border:thin solid black}td{border:thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
 	    }
 	    newWin.print();
 	    newWin.close();

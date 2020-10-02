@@ -57,7 +57,7 @@
 				  	<img src="img/logo.png" alt="cueto" style="position: relative;width: 75%">
 				</div>
 			  	<div class="col-11 col-sm-11 col-xs-10 collapse navbar-collapse" id="navbarColor01">
-				    <ul class="navbar-nav mr-auto" style="font-size: 1.2rem">
+				    <ul class="nav navbar-nav mr-auto" style="font-size: 1.2rem">
 				    	&nbsp;&nbsp;
 				      	<li class="nav-item">
 				        	<a class="nav-link" href="index.php">
@@ -96,7 +96,7 @@
 									    <path fill-rule="evenodd" d="M6 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
 									    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
 									</svg>&nbsp;
-					        		Salida
+					        		Salidas
 					        	</a>
 					      	</li>
 					      	<li class="nav-item">
@@ -117,7 +117,6 @@
 				    	if (!empty($_SESSION['login'])){
 				    ?>
 						    <ul class="navbar-nav mr-right">
-						    <!--
 							  	<li class="nav-item text-right" style="color:white;font-size:12px">
 							     	<script>
 							      		$(document).ready(function(){
@@ -125,13 +124,12 @@
 								       		$('#user').html(user);
 							     		});
 							        </script>
-							    	<p style="position: relative;top:12px">&nbsp;&nbsp;Bienvenido :&nbsp;
+							    	<p style="position: relative;top:14px">&nbsp;&nbsp;Usuario :&nbsp;
 							        	<span id="user"></span>
 							        </p>
 							    </li>
-							-->
 							    <li class="nav-item">
-							        <span style="position: relative;top:12px">&nbsp;&nbsp;//&nbsp;&nbsp;</span>
+							        <span style="position: relative;top:14px">&nbsp;&nbsp;//&nbsp;&nbsp;</span>
 							    </li>
 							    <li class="nav-item text-right" style="color:white;font-size:12px">
 							     	<script>

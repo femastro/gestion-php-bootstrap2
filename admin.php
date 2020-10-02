@@ -29,8 +29,14 @@
 								<div class="col-1 col-sm-1"><?php echo $i ?></div>
 								<div class="col-3 col-sm-3"><?php echo $row['usuario'] ?></div>
 								<div class="col-3 col-sm-3"><?php echo $row['privilegios'] ?></div>
-								<div class="col-3 col-sm-3"><a href="#">Editar</a></div>
-								<div class="col-2 col-sm-2"><a href="#">Quitar</a></div>
+					<?php
+								if($row['usuario'] != "admin"){
+					?>
+									<div class="col-3 col-sm-3"><a href="#">Editar</a></div>
+									<div class="col-2 col-sm-2"><a href="#">Quitar</a></div>
+					<?php
+								}
+					?>
 							</div>
 					<?php
 							$i++;
