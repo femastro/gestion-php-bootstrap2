@@ -10,6 +10,7 @@
 	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas ORDER BY marca ASC";
 	$llantas = mysqli_query($link,$sql);
 ?>
+
 <main class="container-fluid">
 	<div class="row">
 		<h5 class="mt-2">Stock</h5>
@@ -148,16 +149,16 @@
 								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
 							</svg>&nbsp;
-							<a href="#" onclick="editar('<?php echo $cod ?>')">Editar</a>&nbsp;&nbsp;
+							<a href="#" onclick="editar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;&nbsp;
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
 							  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
 							  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
 							</svg>&nbsp;
-							<a href="#" onclick="quitar('<?php echo $cod ?>')">Quitar</a>
+							<a href="#" onclick="quitar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
 						</td>
 						<td width="15%" class="hidden-print">
-							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn btn-primary btn-ver" data-toggle="modal" data-target="#Modal">
+							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn btn-primary btn-ver" data-toggle="modal" data-target="#Modal-edit">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
 								  	<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -241,16 +242,16 @@
 								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
 								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
 							</svg>&nbsp;
-							<a href="#" onclick="editar('<?php echo $cod ?>')">Editar</a>&nbsp;&nbsp;
+							<a href="#" onclick="editar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;&nbsp;
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 							  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
 							  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
 							  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
 							</svg>&nbsp;
-							<a href="#" onclick="quitar('<?php echo $cod ?>')">Quitar</a>
+							<a href="#" onclick="quitar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
 						</td>
 						<td width="15%" class="hidden-print">
-							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn-ver btn btn-primary" data-toggle="modal" data-target="#Modal">
+							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn-ver btn btn-primary" data-toggle="modal" data-target="#Modal-edit">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
 								  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -270,26 +271,20 @@
 	</div>
 </main>
 	<!---
-		MODAL VER ARTICULO 
+		MODAL Editar ARTICULO 
 	-->
-	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="width: 95%">
+	<div class="modal fade" id="Modal-edit" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="width: 100%">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content" style="width: 100%;">
 	      <div class="modal-header">
-	        	<h6 class="modal-title" id="ModalLabel">VISTA DE ARTICULO</h6>
+	        	<h6 class="modal-title" id="ModalLabelEdit"></h6>
 	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          		<span aria-hidden="true">&times;</span>
 	        	</button>
 	      </div>
 	      <div class="modal-body">
-	      		<div  id="this-modal"></div>
-	      		<div class="mt-1">
-			  		<form id="form-img" method="post" enctype="multipart/form-data">
-			  		    <input type="file" name="img">
-			  			<input type="hidden" name="codigo" value="<?php echo $_POST['codigo'] ?>"><br><br>
-			  			<button class="btn btn-block btn-primary" onclick="actualizar_foto()">Actualizar Imagén</button>
-			 		</form>
-			    </div>
+	      		<div  id="this-modal-edit"></div>
+	      		<div class="mt-1" id="form-act-imagen"></div>
 	      </div>
 	      <div class="modal-footer">
 	        	<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
@@ -331,7 +326,7 @@
 	})()
 
 	function actualizar_foto(){
-	 	var formData = new FormData($('#form-img')[0]);
+	 	var formData = new FormData($('.form-img')[0]);
 	    $.ajax({
 	        type: 'POST',
 	        data: formData,
@@ -402,10 +397,10 @@
 		$.ajax({
 			type: 'POST',
 			data: dataString,
-			url: 'articulo.php',
+			url: 'ver-articulo.php',
 			cache: false,
 			success: function(data){
-				$('#this-modal').html(data);
+				$('#this-modal-edit').html(data);
 			}
 		})
 	}
@@ -615,5 +610,36 @@
    				}
    			}
    		})
-  	}
+	}
+	  
+	function editar(codigo){
+	    $('#ModalLabelEdit').html('Editar Articulo');
+		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">Actualizar Imagén</button></form>');
+		$('input[name="codigo"]').val(codigo);
+		var dataString = "codigo="+codigo;
+		$.ajax({
+			type: 'POST',
+			data: dataString,
+			url: 'editar-eliminar-articulo.php',
+			cache: false,
+			success: function(data){
+				$('#this-modal-edit').html(data);
+			}
+		})
+	}
+
+	function quitar(codigo){
+		$('#ModalLabelEdit').html('Eliminar Articulo');
+		$('#form-act-imagen').html('<a href="" class="btn btn-warning btn-block" onclick="eliminar_articulo()">ELIMINAR</a>')
+		var dataString = "codigo="+codigo+"&eliminar=true";
+		$.ajax({
+			type: 'POST',
+			data: dataString,
+			url: 'editar-eliminar-articulo.php',
+			cache: false,
+			success: function(data){
+				$('#this-modal-edit').html(data);
+			}
+		})
+	}
 </script>

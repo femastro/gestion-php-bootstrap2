@@ -61,7 +61,7 @@
 			<td width="25%"><?php echo $row['marca'] ?></td>
 			<td width="28%"><?php echo $row['modelo'] ?></td>
 			<td width="28%"><?php echo $row['medida'] ?></td>
-			<td width="8%" id="cantidad" onclick="cambiar()" style="cursor: pointer;s"><?php echo $cantidad ?></td>
+			<td width="8%" id="cantidad"><?php echo $cantidad ?></td>
 			<td width="3%" class="hidden-print text-center"><a href="#" onclick="$('#<?php echo $cod ?>').remove()" class="borrar">Quitar</a></td>
 		</tr>
 <?php
