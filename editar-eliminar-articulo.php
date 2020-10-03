@@ -1,7 +1,15 @@
 <?php
+    session_start();
+
     require "conexion.php";
 
     $codigo = $_POST['codigo'];
+
+    if ($_SESSION['local'] == 0){
+        $local = " GARAY";
+    }else{
+        $local = " HORNOS";
+    }
 
     if (!empty($_POST['eliminar'])){
 ?>
@@ -30,6 +38,12 @@
     $resultado = mysqli_query($link,$sql) or die(mysqli_error($link));
 
     $row = mysqli_fetch_assoc($resultado);
+
+    $sql = "SELECT cantidad FROM ubicacion WHERE codigo ='".$codigo."' AND ubicacion=".$_SESSION['local'];
+
+    $resp = mysqli_query($link,$sql) or die(mysqli_error($link));
+
+    $rowLocal = mysqli_fetch_assoc($resp);
 
     function image($img){
 		$url = 'imgProducto/'.$img.'.jpg';
@@ -66,29 +80,34 @@
             </div>
             <div class="card-body">
                 <form action="php/actualizar-articulo.php" method="POST">
+                    <input type="hidden" name="codigo" value="<?php echo $codigo ?>" id="codigo">
+                    <input type="hidden" name="stockLocal" value="<?php echo $rowLocal['cantidad'] ?>">
                     <div class="form-group">
                         <label for="marca" style="font-size: 12px;">MARCA</label>
-                        <input type="text" class="form-control" value="<?php echo $row['marca'] ?>">
+                        <input type="text" name="marca" class="form-control" value="<?php echo $row['marca'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="modelo">MODELO</label>
-                        <input type="text" class="form-control" value="<?php echo $row['modelo'] ?>">
+                        <input type="text" name="modelo" class="form-control" value="<?php echo $row['modelo'] ?>">
                     </div>
                     <div class="form-group">
                         <label for="medida">MEDIDA</label>
-                        <input type="text" class="form-control" value="<?php echo $row['medida'] ?>">
+                        <input type="text" name="medida" class="form-control" value="<?php echo $row['medida'] ?>">
                     </div>
                     <div class="form-group" id="input-stock">
-                        <label for="stock">STOCK</label>
-                        <input type="text" class="form-control" value="<?php echo $row['cantidad'] ?>">
+                        <label for="stock">STOCK LOCAL : <strong><?php echo $local ?></strong></label>
+                        <input type="text" name="nuevoStockLocal" class="form-control" value="<?php echo $rowLocal['cantidad'] ?>">
+                    </div>
+                    <div class="form-group" id="input-stock">
+                        <label for="stock">STOCK TOTAL</label>
+                        <input type="text" name="stock" class="form-control" readonly value="<?php echo $row['cantidad'] ?>">
                     </div>
                     <div class="form-group" id="input-proveedor">
                         <label for="proveedor">PROVEEDOR</label>
-                        <input type="text" class="form-control" value="<?php echo $row['cod_Proveedor'] ?>">
+                        <input type="text" name="proveedor" class="form-control" value="<?php echo $row['cod_Proveedor'] ?>">
                     </div>
                     <div class="mt-2" id="btn-actualizar">
-                        <input type="hidden" value="<?php echo $codigo ?>" id="codigo">
-                        <button type="submit" class="btn btn-primary btn-block" onclick="editar_articulo()">Actualizar Datos</button>
+                        <button type="submit" class="btn btn-primary btn-block">Actualizar Datos</button>
                     </div>
                     <div class="form-group mt-3">
                         <img style="height: 210px; width: 50%; display: block;margin: auto" src="<?php image($codigo) ?>" alt="Card image">
@@ -96,26 +115,6 @@
                 </form>
             </div>
         </div>
-        <script>
-            function editar_articulo(){
-                var codigo = $('#codigo').val();
-
-
-
-            }
-
-            function eliminar_articulo(){
-                var codigo = $('#codigo').val();
-            }
-
-
-
-
-
-        </script>
-
-
-
     </body>
 </html>
 

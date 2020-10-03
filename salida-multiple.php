@@ -1,17 +1,31 @@
 <?php 
 	require "validator.php";
-
 	require "header.php";
+
+	if (!empty($_GET['codigo'])){
+
 ?>
+		<script>
+			$(document).ready(function(){
+				var codigo = $('#inCodigo').val();
+				console.log("llega el codigo",codigo);
+				info_articulo(codigo);
+			})
+			</script>
+<?php
+	}
+
+	?>
 		<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
 				<h5 class="mt-2">Salidas</h5>
 				<div class="mt-2 col-xl-12 col-sm-12 fieldset">
 				  	<p class="legend">Filtros</p>
-					<div class="row">
-						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Productos :</label>
+					  <div class="row">
+						  <input type="hidden" id="inCodigo" value="<?php echo $_GET['codigo'] ?>">
+						  <div class="col-xl-2 col-sm-2 form-group">
+							  <label for="">Productos :</label>
 							<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
 								<option value="0">Seleccionar ...</option>
 								<option value="1">Neumaticos</option>
@@ -346,8 +360,26 @@
 			}
 		}
 
-		function onAgregar(){
+		function onAgregar(dato=null){
 			
+			if (dato != null){
+				console.log(dato);
+				var producto = dato;
+				var marca = $('#marca-in').val();
+				var modelo = $('#modelo-in').val();
+				var medida = $('#medida-in').val();
+				var cantidad = $('#cantidad-in').val();
+
+			}else{
+
+				var producto = $('#tipo-producto').val();
+				var marca = $('#selectMarca').val();
+				var modelo = $('#selectModelo').val();
+				var medida = $('#selectMedida').val();
+				var cantidad = $('#selectCantidad').val();
+
+			}
+
 			var table = document.getElementById('table');
 			var rows, x, y;
 			var codigo = [];
@@ -364,12 +396,6 @@
 				codigo.unshift(y.innerHTML);
 
 			}
-
-			var producto = $('#tipo-producto').val();
-			var marca = $('#selectMarca').val();
-			var modelo = $('#selectModelo').val();
-			var medida = $('#selectMedida').val();
-			var cantidad = $('#selectCantidad').val();
 
 			var dataString = "producto="+producto+"&marca="+marca+"&modelo="+modelo+"&medida="+medida+"&cantidad="+cantidad+"&cant="+cant+"&codigo="+codigo;
 
@@ -439,6 +465,24 @@
 		function cambiar(){
 			var cant = $('#cantidad').text();
 			$('#cantidad').html('<input id="nuevaCantidad" value="'+cant+'" size="5%"><br>Stock max. 2');
+
+		}
+
+		function info_articulo(codigo){
+			var dataString = "codigo="+codigo;
+			console.log("inicia la busqueda",codigo);
+			$.ajax({
+				type: 'POST',
+				data: dataString,
+				url: "php/buscar-articulo-codigo.php",
+				cache: false,
+				success: function (data){
+					console.log("vuelve del PHP", data);
+					$('#this-modal').html(data);
+					$('.modal-footer').remove();
+					$('#Modal').modal();
+				}
+			})
 
 		}
 

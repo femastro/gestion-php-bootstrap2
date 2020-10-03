@@ -8,6 +8,7 @@
 
 	    // Si ha pasado el tiempo sobre el limite destruye la session
 	    destruir_session();
+		header('location:index.php');
 	}
 
 	$_SESSION[ 'ULTIMA_ACTIVIDAD' ] = time();
@@ -28,7 +29,7 @@
 	            $params[ 'httponly' ] );
 	    }
 
-	    @session_destroy();
+		@session_destroy();
 	}
 ?>
 <!DOCTYPE html>

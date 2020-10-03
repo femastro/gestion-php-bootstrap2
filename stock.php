@@ -393,6 +393,7 @@
 	}
 
 	function ver(cod){
+		$('#ModalLabelEdit').html('Articulo');
 		var dataString = "codigo="+cod;
 		$.ajax({
 			type: 'POST',
@@ -630,7 +631,7 @@
 
 	function quitar(codigo){
 		$('#ModalLabelEdit').html('Eliminar Articulo');
-		$('#form-act-imagen').html('<a href="" class="btn btn-warning btn-block" onclick="eliminar_articulo()">ELIMINAR</a>')
+		$('#form-act-imagen').html(`<a href="" class="btn btn-warning btn-block" onclick="eliminar_articulo('`+codigo+`')">ELIMINAR</a>`);
 		var dataString = "codigo="+codigo+"&eliminar=true";
 		$.ajax({
 			type: 'POST',
@@ -641,5 +642,24 @@
 				$('#this-modal-edit').html(data);
 			}
 		})
+	}
+
+	function eliminar_articulo(codigo){
+		var dataString = "codigo="+codigo;
+		var mensaje = 'Se va a Eliminar el Articulo Cod. '+codigo+' ! \n Oprima " OK ó ACEPTAR " si desea Eliminar este Registro';
+		if (confirm(mensaje)){
+			$.ajax({
+				type: 'POST',
+				data: dataString,
+				url: "php/eliminar-articulo.php",
+				cache: false,
+				success: function(data){
+					if (data){
+						windows.alert("El Registro fue Eliminado con Exito !");
+						location.href="stock.php";
+					}
+				}
+			})
+		}
 	}
 </script>
