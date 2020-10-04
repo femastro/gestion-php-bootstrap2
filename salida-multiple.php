@@ -57,6 +57,11 @@
 								Agregar
 							</button>
 						</div>
+						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+							<div class="spinner-border text-primary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div> Loading....
+						</div>
 					</div>
 					<!-- Linea Botones -->
 					<div class="row">		
@@ -363,7 +368,7 @@
 		function onAgregar(dato=null){
 			
 			if (dato != null){
-				console.log(dato);
+
 				var producto = dato;
 				var marca = $('#marca-in').val();
 				var modelo = $('#modelo-in').val();
@@ -385,6 +390,7 @@
 			var codigo = [];
 			var cant = [];
 			var contador;
+
 			rows = table.rows;
 
 			for (i = 2; i < (rows.length); i++) {
@@ -407,17 +413,20 @@
 					cache: false,
 					success: function(data){
 						if (data) {
+
 							$('#procesar').prop('disabled','');
+
+							$('#spinner').removeClass('hidden');
 			
-							setTimeout(() => { chekCodigo(dataString) }, 50 );
+							setTimeout(() => { chekCodigo(dataString) }, 2000 );
 
-							setTimeout(() => { imprimir(data) }, 500 );
-
+							setTimeout(() => { imprimir(data) }, 3000 );
+							
 						}else{
 
 							$('#this-modal').html('ATENCIÓN, HA OCURRIDO UN PROBLEMA !');
 							$('#Modal').modal();
-
+							
 						}
 					}
 				})
@@ -425,6 +434,7 @@
 				$('#this-modal').html('DEBE SELECCIONAR UNA CANTIDAD ó COMPLETAR LA BUSQUEDA !');
 				$('#Modal').modal();
 			}
+
 		}
 
 		async function chekCodigo(dataString){
@@ -460,12 +470,7 @@
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').html('');
-		}
-
-		function cambiar(){
-			var cant = $('#cantidad').text();
-			$('#cantidad').html('<input id="nuevaCantidad" value="'+cant+'" size="5%"><br>Stock max. 2');
-
+			$('#spinner').addClass('hidden');
 		}
 
 		function info_articulo(codigo){

@@ -7,7 +7,7 @@
 	if ($producto == 1) {
 		$tabla = 'stockneumaticos';
 	}
-	if ($producto ==2) {
+	if ($producto == 2) {
 		$tabla = 'stockllantas';
 	}
 	if ($producto == 3) {
@@ -23,13 +23,11 @@
 
 
 	if (!empty($_POST['cant'])){
-		$cant = str_replace(',','', $_POST['cant']);
-		$cant = str_split($cant,1);
+		$cant = explode(",",$_POST['cant']);
 	}
 
 	if (!empty($_POST['codigo'])){
-		$codigoLista = str_replace(',', '', $_POST['codigo']);
-		$codigoLista = str_split($codigoLista, 5);
+		$codigoLista = explode(",",$_POST['codigo']);
 	}
 
 	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida FROM ".$tabla." WHERE   marca = '".$marca."' AND modelo = '".$modelo."'  AND medida = '".$medida."'";
@@ -47,7 +45,7 @@
 		$x= 0;
 
 		if (!empty($_POST['cant'])){
-			foreach ($codigoLista as $codigo => $resp) {
+			foreach ($codigoLista as &$resp) {
 				if ($resp == $cod) {
 					$cantidad = $cantidad + $cant[$x];
 				}

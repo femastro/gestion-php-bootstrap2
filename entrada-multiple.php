@@ -32,7 +32,7 @@
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
 							<label for="">Cantidad</label>
-							<select class="form-control" id="cantidad" width="100%">
+							<select class="form-control" id="selectCantidad" width="100%">
 								<?php 
 									for($i = 0; $i  < 51; $i++){
 								?>	
@@ -50,6 +50,11 @@
 								</svg>&nbsp;
 								Agregar
 							</button>
+						</div>
+						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+							<div class="spinner-border text-primary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div> Loading....
 						</div>
 					</div>
 					<div class="row">
@@ -330,12 +335,33 @@
 		function onAgregar(){
 			
 			var tbody = document.getElementById('tbody').innerHTML;
+
 			var producto = $('#tipo-producto').val();
 			var marca = $('#selectMarca').val();
 			var modelo = $('#selectModelo').val();
 			var medida = $('#selectMedida').val();
-			var cantidad = $('#cantidad').val();
-			var dataString = "producto="+producto+"&marca="+marca+"&modelo="+modelo+"&medida="+medida+"&cantidad="+cantidad;
+			var cantidad = $('#selectCantidad').val();
+
+			var table = document.getElementById('table');
+			var rows, x, y;
+			var codigo = [];
+			var cant = [];
+			var contador;
+
+			rows = table.rows;
+
+			for (i = 2; i < (rows.length); i++) {
+
+				y= rows[i].getElementsByTagName('TD')[0];
+				x= rows[i].getElementsByTagName('TD')[4];
+
+				cant.unshift(x.innerHTML);
+				codigo.unshift(y.innerHTML);
+
+			}
+
+			var dataString = "producto="+producto+"&marca="+marca+"&modelo="+modelo+"&medida="+medida+"&cantidad="+cantidad+"&cant="+cant+"&codigo="+codigo;
+
 			if (medida != null && cantidad > 0) {
 				$.ajax({
 					type: 'POST',
@@ -344,16 +370,20 @@
 					cache: false,
 					success: function(data){
 						if (data) {
+
 							$('#procesar').prop('disabled','');
-							$('#tbody ').append(data);
-							$('#tipo-producto').val(0);
-							$('#selectMarca').html('');
-						    $('#selectModelo').html('');
-							$('#selectMedida').html('');
-							$('#cantidad').val(0);
+
+							$('#spinner').removeClass('hidden');
+			
+							setTimeout(() => { chekCodigo(dataString) }, 2000 );
+
+							setTimeout(() => { imprimir(data) }, 3000 );
+							
 						}else{
+
 							$('#this-modal').html('ATENCIÓN, HA OCURRIDO UN PROBLEMA !');
 							$('#Modal').modal();
+							
 						}
 					}
 				})
@@ -361,7 +391,70 @@
 				$('#this-modal').html('DEBE SELECCIONAR UNA CANTIDAD ó COMPLETAR LA BUSQUEDA !');
 				$('#Modal').modal();
 			}
+
 		}
+
+		async function chekCodigo(dataString){
+			var table = document.getElementById('table');
+			var rows, x, y;
+			var codigo = [];
+			var cant = 0;
+			rows = table.rows;
+			$.ajax({
+				type: 'POST',
+				data: dataString,
+				url: 'php/buscar-codigo.php',
+				cache: false,
+				success: function(datos){
+					for (i = 2; i < (rows.length); i++) {
+						x= rows[i].getElementsByTagName('TD')[4];
+						y= rows[i].getElementsByTagName('TD')[0];
+						if ( y.innerHTML  ==  datos ) {
+							cod = y.innerHTML;
+							$('#'+cod).remove();
+						}
+					}
+				}
+			})
+		}
+
+		
+		async function chekCodigo(dataString){
+			var table = document.getElementById('table');
+			var rows, x, y;
+			var codigo = [];
+			var cant = 0;
+			rows = table.rows;
+			$.ajax({
+				type: 'POST',
+				data: dataString,
+				url: 'php/buscar-codigo.php',
+				cache: false,
+				success: function(datos){
+					for (i = 2; i < (rows.length); i++) {
+						x= rows[i].getElementsByTagName('TD')[4];
+						y= rows[i].getElementsByTagName('TD')[0];
+						if ( y.innerHTML  ==  datos ) {
+							cod = y.innerHTML;
+							$('#'+cod).remove();
+						}
+					}
+				}
+			})
+		}
+
+		async function imprimir(data){
+			var tbody = document.getElementById('tbody').innerHTML;
+			$('#tbody ').html(tbody);
+			$('#tbody ').append(data);
+			$('#tipo-producto').val(0);
+			$('#selectMarca').html('');
+			$('#selectModelo').html('');
+			$('#selectMedida').html('');
+			$('#selectCantidad').val(0);
+			$('#spinner').addClass('hidden');
+		}
+
 
 	</script>
 </html>
