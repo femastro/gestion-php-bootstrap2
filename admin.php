@@ -3,6 +3,7 @@
 	require "header.php";
 	require "conexion.php";
 	require "php/buscar-usuarios.php";
+	
  ?>
  <script type="text/javascript" src="js/checkRole.js"></script>
  <main class="container">
@@ -18,7 +19,7 @@
 						<div class="col-xs-1 col-sm-1">#</div>
 						 <div class="col-xs-3 col-sm-3">Usuarios</div>
 						 <div class="col-xs-3 col-sm-3">Role</div>
-						 <div class="col-xs-5 col-sm-5"><a href="#">Nuevo</a></div>
+						 <div class="col-xs-5 col-sm-5"><a href="#" onclick="new_user()" data-toggle="modal" data-target="#Modal">Nuevo</a></div>
 					</div>
 					<hr>
 					<?php
@@ -32,8 +33,12 @@
 					<?php
 								if($row['usuario'] != "admin"){
 					?>
-									<div class="col-xs-3 col-sm-3"><a href="#">Editar</a></div>
-									<div class="col-xs-2 col-sm-2"><a href="#">Quitar</a></div>
+									<div class="col-xs-3 col-sm-3">
+										<a href="#" onclick="edit_user(<?php echo $row['idusuarios'] ?>)" data-toggle="modal" data-target="#Modal">Editar</a>
+									</div>
+									<div class="col-xs-2 col-sm-2">
+										<a href="#" onclick="delete_user(<?php echo $row['idusuarios'] ?>)" data-toggle="modal" data-target="#Modal">Quitar</a>
+									</div>
 					<?php
 								}
 					?>
@@ -52,4 +57,68 @@
 			</div>
  		</div>
  	</div>
+	 <!---
+		MODAL
+	-->
+	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="width: 100%">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content" style="width: 100%;">
+	      <div class="modal-header">
+				<h6 id="title-modal"></h6>
+	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          		<span aria-hidden="true">&times;</span>
+	        	</button>
+	      </div>
+	      <div class="modal-body row">
+				<div  id="this-modal" class="col-12 col-sm-12"></div>
+                <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+					</div> Loading....
+				</div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!--
+		FIN MODAL
+	-->
  </main>
+ <script>
+
+	function new_user(){
+		$('#title-modal').html('Nuevo');
+		$('#this-modal').load('php/nuevo-usuario.php');
+	}
+
+	function edit_user(id){
+		$('#title-modal').html('Editar');
+		var dataString = "id="+id;
+		$.ajax({
+			type: 'POST',
+			data: dataString,
+			url: 'php/editar-usuario.php',
+			cache: false,
+			success: function (data){
+				$('#this-modal').html(data);
+			}
+		})
+	}
+
+	function delete_user(id){
+		$('#title-modal').html('Eliminar');
+		var dataString = "id="+id;
+		$.ajax({
+			type: 'POST',
+			data: dataString,
+			url: 'php/eliminar-usuario.php',
+			cache: false,
+			success: function (data){
+				$('#this-modal').html(data);
+			}
+		})
+	}
+ 
+ 
+ 
+ </script>

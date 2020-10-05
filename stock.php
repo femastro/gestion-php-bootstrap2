@@ -292,7 +292,7 @@
 	      		<div class="mt-1" id="form-act-imagen"></div>
 	      </div>
 	      <div class="modal-footer">
-	        	<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+	        	<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">CERRAR</button>
 	      </div>
 	    </div>
 	  </div>
