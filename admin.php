@@ -31,7 +31,7 @@
 								<div class="col-xs-3 col-sm-3"><?php echo $row['usuario'] ?></div>
 								<div class="col-xs-3 col-sm-3"><?php echo $row['privilegios'] ?></div>
 					<?php
-								if($row['usuario'] != "admin"){
+								if($row['usuario'] != "Admin"){
 					?>
 									<div class="col-xs-3 col-sm-3">
 										<a href="#" onclick="edit_user(<?php echo $row['idusuarios'] ?>)" data-toggle="modal" data-target="#Modal">Editar</a>
