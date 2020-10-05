@@ -51,11 +51,6 @@
 								Agregar
 							</button>
 						</div>
-						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
-							<div class="spinner-border text-primary" role="status">
-								<span class="sr-only">Loading...</span>
-							</div> Loading....
-						</div>
 					</div>
 					<div class="row">
 						<div class="col-xl-2 col-sm-2 form-inline" style="margin-top: 12px">
@@ -102,7 +97,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mt-2">
+				<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+					</div> Loading....
+				</div>
 				<table class="col-xl-12 col-sm-12 table" id="table">
 					<thead>
 						<tr>
@@ -197,14 +197,20 @@
 					url: 'php/alta.php',
 					cache: false,
 					success: function(data){
-						window.alert("PROCESO REALIZADO CON EXITO !");
+						var msj = 'EL PROCESO SE REALIZO CON EXITO !';
+						$('#this-modal').html(msj);
+						$('#Modal').modal();
+						$('#tbody').html('');
+						$('#procesar').prop('disabled','disabled');
 					}
 				});
-				location.href="entrada-multiple.php";
+				//location.href="entrada-multiple.php";
 
 			}else{
 
-				alert('No se confirmo el proceso');
+				var msj = 'UD. HA CANCELADO EL PROCESO !';
+				$('#this-modal').html(msj);
+				$('#Modal').modal();
 				$('.hidden-print').removeClass('hidden');
 
 			}
@@ -375,9 +381,9 @@
 
 							$('#spinner').removeClass('hidden');
 			
-							setTimeout(() => { chekCodigo(dataString) }, 2000 );
+							setTimeout(() => { chekCodigo(dataString) }, 1000 );
 
-							setTimeout(() => { imprimir(data) }, 3000 );
+							setTimeout(() => { imprimir(data) }, 2000 );
 							
 						}else{
 

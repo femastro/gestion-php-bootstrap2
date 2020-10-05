@@ -8,7 +8,6 @@
 		<script>
 			$(document).ready(function(){
 				var codigo = $('#inCodigo').val();
-				console.log("llega el codigo",codigo);
 				info_articulo(codigo);
 			})
 			</script>
@@ -57,11 +56,6 @@
 								Agregar
 							</button>
 						</div>
-						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
-							<div class="spinner-border text-primary" role="status">
-								<span class="sr-only">Loading...</span>
-							</div> Loading....
-						</div>
 					</div>
 					<!-- Linea Botones -->
 					<div class="row">		
@@ -99,7 +93,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mt-2">
+				<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+					</div> Loading....
+				</div>
 				<table class="col-xl-12 col-sm-12 table" id="table">
 					<thead>
 						<tr>
@@ -137,7 +136,11 @@
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
-		      <div id="this-modal" class="modal-body"></div>
+			  <div id="this-modal" class="modal-body"></div>
+			  <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner2">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+				</div> Loading....
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		      </div>
@@ -149,6 +152,7 @@
 	-->
 	</body>
 	<script>
+
 		function procesar() {
 			$('.hidden-print').remove();
 
@@ -191,14 +195,20 @@
 					url: 'php/salida.php',
 					cache: false,
 					success: function(data){
-						window.alert("PROCESO REALIZADO CON EXITO !");
+						var msj = 'EL PROCESO SE REALIZO CON EXITO !';
+						$('#this-modal').html(msj);
+						$('#Modal').modal();
+						$('#tbody').html('');
+						$('#procesar').prop('disabled','disabled');
 					}
 				});
-				location.href="entrada-multiple.php";
+				//location.href="salida-multiple.php";
 
 			}else{
 
-				alert('No se confirmo el proceso');
+				var msj = 'No se confirmo el proceso';
+				$('#this-modal').html(msj);
+				$('#Modal').modal();
 				$('.hidden-print').removeClass('hidden');
 
 			}
@@ -289,7 +299,7 @@
 			}
 		}
 		function buscar_modelo(marca){
-			$('#tbody2').html('');
+			$('#tbody').html('');
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').html('');
@@ -414,13 +424,11 @@
 					success: function(data){
 						if (data) {
 
-							$('#procesar').prop('disabled','');
-
 							$('#spinner').removeClass('hidden');
 			
-							setTimeout(() => { chekCodigo(dataString) }, 2000 );
+							setTimeout(() => { chekCodigo(dataString) }, 1000 );
 
-							setTimeout(() => { imprimir(data) }, 3000 );
+							setTimeout(() => { imprimir(data) }, 2000 );
 							
 						}else{
 
@@ -471,20 +479,21 @@
 			$('#selectMedida').html('');
 			$('#selectCantidad').html('');
 			$('#spinner').addClass('hidden');
+			$('#procesar').prop('disabled','');
 		}
 
 		function info_articulo(codigo){
+			$('#this-modal').html('');
 			var dataString = "codigo="+codigo;
-			console.log("inicia la busqueda",codigo);
 			$.ajax({
 				type: 'POST',
 				data: dataString,
 				url: "php/buscar-articulo-codigo.php",
 				cache: false,
 				success: function (data){
-					console.log("vuelve del PHP", data);
-					$('#this-modal').html(data);
-					$('.modal-footer').remove();
+					$('#spinner2').removeClass('hidden');
+					setTimeout(() => { $('#this-modal').html(data) }, 1000);
+					setTimeout(() => { $('#spinner2').addClass('hidden') }, 1000);
 					$('#Modal').modal();
 				}
 			})

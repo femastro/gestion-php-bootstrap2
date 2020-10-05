@@ -283,7 +283,12 @@
 	        	</button>
 	      </div>
 	      <div class="modal-body">
-	      		<div  id="this-modal-edit"></div>
+				<div  id="this-modal-edit"></div>
+                <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+				</div> Loading....
+				</div>
 	      		<div class="mt-1" id="form-act-imagen"></div>
 	      </div>
 	      <div class="modal-footer">
@@ -326,19 +331,23 @@
 	})()
 
 	function actualizar_foto(){
-	 	var formData = new FormData($('.form-img')[0]);
-	    $.ajax({
-	        type: 'POST',
-	        data: formData,
-	        url: 'actualizar-foto.php',
-	        contentType: false,
-	        processData: false,
-	        success: function(response) {
-			    if (response) {
-			     	alert('Imagen Guardada con Exito !')		               	
-	            }
-	        },
-	    });
+		var formData = new FormData($('.form-img')[0]);
+		if (formData != null) {
+			$.ajax({
+				type: 'POST',
+				data: formData,
+				url: 'actualizar-foto.php',
+				contentType: false,
+				processData: false,
+				success: function(response) {
+					if (response) {
+						alert('Imagen Guardada con Exito !')		               	
+					}
+				},
+	    	});
+		}else{
+			window.alert("ERROR!");
+		}
 	}
 
 	function sortTable(n,type,tabla) {
@@ -393,7 +402,10 @@
 	}
 
 	function ver(cod){
+		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">Actualizar Imagén</button></form>');
+		$('.form-img button').attr('disabled','disabled');
 		$('#ModalLabelEdit').html('Articulo');
+		$('#this-modal-edit').html('');
 		var dataString = "codigo="+cod;
 		$.ajax({
 			type: 'POST',
@@ -401,7 +413,10 @@
 			url: 'ver-articulo.php',
 			cache: false,
 			success: function(data){
-				$('#this-modal-edit').html(data);
+				$('#spinner').removeClass('hidden');
+				setTimeout(() => { $('#this-modal-edit').html(data) }, 1000);
+				setTimeout(() => { $('#spinner').addClass('hidden') }, 1000);
+				setTimeout(() => { $('.form-img button').prop('disabled','') }, 1000);
 			}
 		})
 	}
@@ -540,7 +555,6 @@
 			url: 'php/listado.php',
 			cache: false,
 			success: function(data){
-				console.log(dataString);
 				if (producto == 1) {
 					$('#tipo1').html('NEUMATICOS');
 				}
@@ -558,7 +572,6 @@
 		var marca = $('#selectMarca').val();
 		var modelo = $('#selectModelo').val();
 		var dataString = "medida="+medida+"&modelo="+modelo+"&marca="+marca+"&producto="+producto;
-		console.log(dataString);
 		$.ajax({
 			type: 'POST',
 			data: dataString,
@@ -616,7 +629,9 @@
 	function editar(codigo){
 	    $('#ModalLabelEdit').html('Editar Articulo');
 		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">Actualizar Imagén</button></form>');
+		$('.form-img button').attr('disabled','disabled');
 		$('input[name="codigo"]').val(codigo);
+		$('#this-modal-edit').html('');
 		var dataString = "codigo="+codigo;
 		$.ajax({
 			type: 'POST',
@@ -624,14 +639,19 @@
 			url: 'editar-eliminar-articulo.php',
 			cache: false,
 			success: function(data){
-				$('#this-modal-edit').html(data);
+				$('#spinner').removeClass('hidden');
+				setTimeout(() => { $('#this-modal-edit').html(data) }, 1000);
+				setTimeout(() => { $('#spinner').addClass('hidden') }, 1000);
+				setTimeout(() => { $('.form-img button').prop('disabled','') }, 1000);
 			}
 		})
 	}
 
 	function quitar(codigo){
 		$('#ModalLabelEdit').html('Eliminar Articulo');
-		$('#form-act-imagen').html(`<a href="" class="btn btn-warning btn-block" onclick="eliminar_articulo('`+codigo+`')">ELIMINAR</a>`);
+		$('#form-act-imagen').html(`<button id="quitar" href="" class="btn btn-warning btn-block" onclick="eliminar_articulo('`+codigo+`')">ELIMINAR</button>`);
+		$('#this-modal-edit').html('');
+		$('#quitar').attr('disabled','disabled');
 		var dataString = "codigo="+codigo+"&eliminar=true";
 		$.ajax({
 			type: 'POST',
@@ -639,7 +659,10 @@
 			url: 'editar-eliminar-articulo.php',
 			cache: false,
 			success: function(data){
-				$('#this-modal-edit').html(data);
+				$('#spinner').removeClass('hidden');
+				setTimeout(() => { $('#this-modal-edit').html(data) }, 1000);
+				setTimeout(() => { $('#spinner').addClass('hidden') }, 1000);
+				setTimeout(() => { $('#quitar').prop('disabled','') }, 1000);
 			}
 		})
 	}
