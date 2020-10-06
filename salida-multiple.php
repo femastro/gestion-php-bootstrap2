@@ -154,7 +154,8 @@
 	<script>
 
 		function procesar() {
-			$('.hidden-print').remove();
+			
+			setTimeout( () => { $('.hidden-print').addClass('hidden')}, 500);
 
 			var table = $("table"),
 			rows = [],
@@ -164,7 +165,6 @@
 			    header.push($(this).html());
 			});
 
-			$('.hidden-print').addClass('hidden');
 
 			table.find("tbody tr").each(function () {
 
@@ -180,6 +180,8 @@
 			    });
 			    rows.push(row);
 			});
+
+			console.log(rows);
 
 			var mensaje = "Desea imprimir el listado ?";
 			var procesar = "ACEPTAR para procesar la salida de productos !.";

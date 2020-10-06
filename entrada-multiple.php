@@ -157,7 +157,8 @@
 		}
 
 		function procesar() {
-			$('.hidden-print').remove();
+
+			setTimeout( () => { $('.hidden-print').addClass('hidden')}, 500);
 			
 			var table = $("#table"),
 
@@ -182,6 +183,8 @@
 			    });
 			    rows.push(row);
 			});
+
+			console.log(rows);
 
 			var mensaje = "Desea imprimir el listado ?";
 			var procesar = "ACEPTAR para procesar la Entrada de productos !.";
