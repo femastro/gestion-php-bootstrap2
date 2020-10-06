@@ -3,7 +3,7 @@
 
 	$dato = $_POST['dato'];
 
-	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas WHERE   cod_Articulo LIKE 'L".$dato."%' OR marca  LIKE '".$dato."%' OR modelo  LIKE '".$dato."%'  OR medida  LIKE '".$dato."%'ORDER BY marca ASC";
+	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas WHERE cod_Articulo LIKE 'L".$dato."%' OR marca  LIKE '".$dato."%' OR modelo  LIKE '".$dato."%'  OR medida  LIKE '".$dato."%'ORDER BY marca ASC";
 
 	$llantas = mysqli_query($link,$sql);
 
@@ -12,7 +12,7 @@
 	while ($row = mysqli_fetch_assoc($llantas)){
 		$cod = $row['codigo'];
 ?>
-		<tr id="<?php echo $row['codigo'] ?>" class="resaltar">
+		<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
 			<td width="5%"><?php echo $x ?></td>
 			<td width="8%"><?php echo $row['codigo'] ?></td>
 			<td width="20%"><?php echo $row['marca'] ?></td>

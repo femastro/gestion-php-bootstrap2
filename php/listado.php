@@ -46,7 +46,7 @@
 	while ($row = mysqli_fetch_assoc($lista)){
 		$cod = $row['codigo'];
 ?>
-		<tr id="<?php echo $row['codigo'] ?>" class="resaltar">
+		<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
 			<td width="5%"><?php echo $x ?></td>
 			<td width="8%"><?php echo $row['codigo'] ?></td>
 			<td width="20%"><?php echo $row['marca'] ?></td>

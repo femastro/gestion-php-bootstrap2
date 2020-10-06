@@ -43,9 +43,8 @@
 				<div class="col-xl-10 col-sm-9" style="margin-top: 12px;">
 					<div class="row">
 						<div class="col-xl-8 col-sm-6">
-				    		<input class="form-control" type="text" placeholder="Buscar..." id="search" onkeypress="buscar(this.value)" style="width:100%;">
+				    		<input class="form-control" type="text" placeholder="Buscar..." id="search" onkeydown="buscar(this.value)" style="width:100%;">
 							&nbsp;
-							
 						</div>
 						<div class="col-xl-2 col-sm-3">
 						   	<button class="btn btn-secondary btn-block" onclick="buscar($('#search').val())">
@@ -137,7 +136,7 @@
 					while ($row = mysqli_fetch_assoc($neumaticos)){
 						$cod = $row['codigo'];
 				?>
-					<tr id="<?php echo $row['codigo'] ?>" class="resaltar">
+					<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
 						<td width="5%"><?php echo $x ?></td>
 						<td width="8%"><?php echo $row['codigo'] ?></td>
 						<td width="20%"><?php echo $row['marca'] ?></td>
@@ -230,7 +229,7 @@
 					while ($row = mysqli_fetch_assoc($llantas)){
 						$cod = $row['codigo'];
 				?>
-					<tr id="<?php echo $row['codigo'] ?>" class="resaltar">
+					<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
 						<td width="5%"><?php echo $x ?></td>
 						<td width="8%"><?php echo $row['codigo'] ?></td>
 						<td width="20%"><?php echo $row['marca'] ?></td>
@@ -284,7 +283,7 @@
 	      </div>
 	      <div class="modal-body">
 				<div  id="this-modal-edit"></div>
-                <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner">
+                <div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner">
 					<div class="spinner-border text-primary" role="status">
 						<span class="sr-only">Loading...</span>
 				</div> Loading....
@@ -402,7 +401,7 @@
 	}
 
 	function ver(cod){
-		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">Actualizar Imagén</button></form>');
+		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">ACTUALIZAR IMAGÉN</button></form>');
 		$('.form-img button').attr('disabled','disabled');
 		$('#ModalLabelEdit').html('Articulo');
 		$('#this-modal-edit').html('');
@@ -605,7 +604,7 @@
 	   				$('#tbody').html(data);
 					$('#tipo1').html('NEUMATICOS');
    				}else{
-   					$('#table1').hide();
+					$('#tbody').html('<td colspan="8" class="text-center mt-5"><span><strong>No se Encontrado Resultado para la Busqueda</strong>.</span></td>');
    				}
    			}
    		})
@@ -620,7 +619,7 @@
 	   				$('#tbody2').html(data);
 	   				$('#tipo2').html('LLANTAS');
    				}else{
-   					$('#table2').hide();
+					$('#tbody2').html('<td colspan="8" class="text-center mt-5"><span><strong>No se Encontrado Resultado para la Busqueda</strong>.</span></td>');
    				}
    			}
    		})
@@ -628,7 +627,7 @@
 	  
 	function editar(codigo){
 	    $('#ModalLabelEdit').html('Editar Articulo');
-		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">Actualizar Imagén</button></form>');
+		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">ACTUALIZAR IMAGÉN</button></form>');
 		$('.form-img button').attr('disabled','disabled');
 		$('input[name="codigo"]').val(codigo);
 		$('#this-modal-edit').html('');
@@ -640,9 +639,9 @@
 			cache: false,
 			success: function(data){
 				$('#spinner').removeClass('hidden');
-				setTimeout(() => { $('#this-modal-edit').html(data) }, 1000);
-				setTimeout(() => { $('#spinner').addClass('hidden') }, 1000);
-				setTimeout(() => { $('.form-img button').prop('disabled','') }, 1000);
+				setTimeout(() => { $('#this-modal-edit').html(data) }, 700);
+				setTimeout(() => { $('#spinner').addClass('hidden') }, 700);
+				setTimeout(() => { $('.form-img button').prop('disabled','') }, 700);
 			}
 		})
 	}
@@ -684,5 +683,9 @@
 				}
 			})
 		}
+	}
+
+	function salida_multiple(codigo){
+		location.href="salida-multiple.php?codigo="+codigo;
 	}
 </script>

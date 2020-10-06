@@ -128,24 +128,24 @@
 			MODAL 
 	-->
 		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="ModalLabel">ATENCIÓN</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-			  <div id="this-modal" class="modal-body"></div>
-			  <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner2">
-					<div class="spinner-border text-primary" role="status">
-						<span class="sr-only">Loading...</span>
-				</div> Loading....
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
-		      </div>
-		    </div>
-		  </div>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="ModalLabel">ATENCIÓN</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div id="this-modal" class="modal-body"></div>
+					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner2">
+						<div class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div> Loading....
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">CERRAR</button>
+				</div>
+			</div>
 		</div>
 	<!----
 			FIN MODAL
@@ -485,6 +485,7 @@
 
 		function info_articulo(codigo){
 			$('#this-modal').html('');
+			$('.modal-footer').hide();
 			var dataString = "codigo="+codigo;
 			$.ajax({
 				type: 'POST',

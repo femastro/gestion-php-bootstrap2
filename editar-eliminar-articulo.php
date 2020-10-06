@@ -28,9 +28,11 @@
 
     if ($cadena == 'N'){
         $tabla = "stockneumaticos";
+        $articulo = "NEUMÁTICO";
     }
     if ($cadena == 'L'){
         $tabla = "stockllantas";
+        $articulo = "LLANTA";
     }
 
     $sql = "SELECT marca, modelo, medida, cantidad, cod_Proveedor FROM ".$tabla." WHERE cod_Articulo ='".$codigo."'";
@@ -76,7 +78,7 @@
         <script type="text/javascript" src="js/checkRole.js"></script>
         <div class="card" style="margin: 0 auto">
             <div class="card-header">
-                <h4><?php echo $row['marca'] ?></h4>
+                <h3><?php echo $articulo ?></h3>
             </div>
             <div class="card-body">
                 <form action="php/actualizar-articulo.php" method="POST">
@@ -107,7 +109,7 @@
                         <input type="text" name="proveedor" class="form-control" value="<?php echo $row['cod_Proveedor'] ?>">
                     </div>
                     <div class="mt-2" id="btn-actualizar">
-                        <button type="submit" class="btn btn-primary btn-block">Actualizar Datos</button>
+                        <button type="submit" class="btn btn-primary btn-block">ACTUALIZAR DATOS</button>
                     </div>
                     <div class="form-group mt-3">
                         <img style="height: 210px; width: 50%; display: block;margin: auto" src="<?php image($codigo) ?>" alt="Card image">

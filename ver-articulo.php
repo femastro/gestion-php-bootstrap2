@@ -5,9 +5,11 @@
 
 		if ($cadena == "N") {
 			$tabla = "stockneumaticos";
+			$articulo = "NEUMÁTICO";
 		};
 		if ($cadena == "L"){
 			$tabla = "stockllantas";
+			$articulo = "LLANTA";
 		};
 
 	$sql = "SELECT * FROM ".$tabla." WHERE cod_Articulo ='".$_POST['codigo']."'";
@@ -48,29 +50,30 @@
     </head>
     <body class="container-fluid">
 		 <div class="card" style="margin: 0 auto">
-			<h4 class="card-header"><?php echo $row['marca'] ?>&nbsp;<span style="font-size:12px" >(<span id="codigo"><?php echo $_POST['codigo'] ?></span> )</span></h4>
+		 	<h3 class="card-header"><?php echo $articulo ?></h3>
 			<div class="card-body">
-				<h5 class="card-title"><?php echo $row['modelo'] ?></h5>
-				<h6 class="card-subtitle mt-1"><?php echo $row['medida'] ?></h6>
-			    <p class="mt-1"><strong>Stock : </strong><?php echo $row['cantidad']; ?></p>
-			    <p class="mt-1">
+				<h4 class="card-title"><?php echo $row['marca'] ?>&nbsp;<span style="font-size:12px" >(<span id="codigo"><?php echo $_POST['codigo'] ?></span> )</span></h4>
+				<h5 class="mt-2"><?php echo $row['modelo'] ?></h5>
+				<h6 class="mt 2"><?php echo $row['medida'] ?></h6>
+			    <p class="mt-3"><strong>STOCK Gral. : </strong><?php echo $row['cantidad']; ?></p>
+			    <p class="mt-2">
 			   	<?php 
 			   		if ($row['cantidad'] > 0){
 			   	?>
-			   			<a href="#" onclick="salida_multiple()" class="btn btn-primary" style="font-size: 10px">
+			   			<a href="#" onclick="salida_multiple()" class="btn btn-primary btn-block" style="font-size: 12px">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
 								<path fill-rule="evenodd" d="M6 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
-							</svg>&nbsp;Salida
+							</svg>&nbsp; ENVIAR a SALIDA
 					   </a>
 			   	<?php
 			   		}else{
 			   	?>
-			   			<button class="btn btn-primary" style="font-size: 10px" disabled="disabled">
+			   			<button class="btn btn-primary btn-block" style="font-size: 10px" disabled="disabled">
 							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
 								<path fill-rule="evenodd" d="M6 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
-							</svg>&nbsp;Salida
+							</svg>&nbsp;  ENVIAR a SALIDA
 			   			</button>
 				<?php
 			   		}
@@ -81,13 +84,6 @@
 				<img style="height: 210px; width: 50%; display: block;margin: auto" src="<?php image($cod) ?>" alt="Card image">
 			</div>
 		</div>
-
-		<script>
-			function salida_multiple(){
-				var codigo = $('#codigo').text();
-				location.href="salida-multiple.php?codigo="+codigo;
-			}
-		</script>
 
 		<!-- MODAL -->
         <div class="modal fade" id="ModalCenterOK" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
@@ -102,5 +98,11 @@
 	            </div>
           	</div>
         </div>
+		<script>
+			function salida_multiple(){
+				var codigo = $('#codigo').text();
+				location.href="salida-multiple.php?codigo="+codigo;
+			}
+		</script>
     </body>
 </html>

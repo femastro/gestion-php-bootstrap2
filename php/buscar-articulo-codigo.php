@@ -81,10 +81,11 @@
                     <p class="text-danger">- SE VA A AGREGAR A LA LISTA DE SALIDA EL SIGUIENTE ARTICULO "ACEPTAR o CANCELAR".</p>
                     <p class="text-warning">- SELECCIONE LA CANTIDAD ANTES DE ACEPTAR.</p>
                 </div>
-                <div class="mt-3 text-right">
-                    <a href="salida-multiple.php" class="btn btn-danger">CANCELAR</a>
-                    &nbsp;&nbsp;
-                    <a href="#" class="btn btn-primary" onclick="onAgregar('<?php echo $producto ?>')" data-dismiss="modal">ACEPTAR</a>
+                <div class="mt-3">
+                    <a href="#" class="btn btn-primary btn-block" onclick="onAgregar('<?php echo $producto ?>')" data-dismiss="modal">ACEPTAR</a>
+                </div>
+                <div class="mt-2">
+                    <a href="salida-multiple.php" class="btn btn-danger btn-block">CANCELAR</a>
                 </div>
             </div>
         </div>
