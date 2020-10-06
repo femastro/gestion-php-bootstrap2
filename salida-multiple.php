@@ -299,7 +299,6 @@
 			}
 		}
 		function buscar_modelo(marca){
-			$('#tbody').html('');
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').html('');
@@ -428,7 +427,7 @@
 			
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
 
-							setTimeout(() => { imprimir(data) }, 2000 );
+							setTimeout(() => { imprimir(data) }, 1500 );
 							
 						}else{
 
