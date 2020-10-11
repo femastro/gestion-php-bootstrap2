@@ -377,6 +377,7 @@
 		}
 
 		function onAgregar(dato=null){
+			$('.modal-footer').show();
 			
 			if (dato != null){
 

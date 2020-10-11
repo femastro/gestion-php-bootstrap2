@@ -9,6 +9,8 @@
 
 	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas ORDER BY marca ASC";
 	$llantas = mysqli_query($link,$sql);
+
+	mysqli_close($link);
 ?>
 
 <main class="container-fluid">
@@ -273,28 +275,28 @@
 		MODAL Editar ARTICULO 
 	-->
 	<div class="modal fade" id="Modal-edit" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="width: 100%">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content" style="width: 100%;">
-	      <div class="modal-header">
-	        	<h6 class="modal-title" id="ModalLabelEdit"></h6>
-	        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          		<span aria-hidden="true">&times;</span>
-	        	</button>
-	      </div>
-	      <div class="modal-body">
-				<div  id="this-modal-edit"></div>
-                <div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner">
-					<div class="spinner-border text-primary" role="status">
-						<span class="sr-only">Loading...</span>
-				</div> Loading....
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content" style="width: 100%;">
+	      		<div class="modal-header">
+	        		<h6 class="modal-title" id="ModalLabelEdit"></h6>
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          			<span aria-hidden="true">&times;</span>
+	        		</button>
+	      		</div>
+				<div class="modal-body">
+					<div  id="this-modal-edit"></div>
+					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner">
+						<div class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div> Loading....
+					</div>
+						<div class="mt-1" id="form-act-imagen"></div>
 				</div>
-	      		<div class="mt-1" id="form-act-imagen"></div>
-	      </div>
-	      <div class="modal-footer">
-	        	<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">CERRAR</button>
-	      </div>
-	    </div>
-	  </div>
+	      		<div class="modal-footer">
+	        		<button type="button" class="btn btn-block btn-danger" data-dismiss="modal">CERRAR</button>
+	      		</div>
+	    	</div>
+	  	</div>
 	</div>
 	<!--
 		FIN MODAL
