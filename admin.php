@@ -5,6 +5,11 @@
 	require "php/buscar-usuarios.php";
 	
  ?>
+ <script>
+	$(document).ready(function(){
+		$('#spinner').hide();
+	})
+ </script>
  <script type="text/javascript" src="js/checkRole.js"></script>
  <main class="container">
  	<div class="row">
@@ -87,11 +92,14 @@
  <script>
 
 	function new_user(){
+		$('#this-modal').html('');
 		$('#title-modal').html('Nuevo');
 		$('#this-modal').load('php/nuevo-usuario.php');
 	}
 
 	function edit_user(id){
+		$('#this-modal').html('');
+		$('#spinner').show();
 		$('#title-modal').html('Editar');
 		var dataString = "id="+id;
 		$.ajax({
@@ -100,12 +108,15 @@
 			url: 'php/editar-usuario.php',
 			cache: false,
 			success: function (data){
-				$('#this-modal').html(data);
+				setTimeout(() => { $('#spinner').hide(); }, 1000);
+				setTimeout(() => { $('#this-modal').html(data) }, 1200);
 			}
 		})
 	}
 
 	function delete_user(id){
+		$('#this-modal').html('');
+		$('#spinner').show();
 		$('#title-modal').html('Eliminar');
 		var dataString = "id="+id;
 		$.ajax({
@@ -114,11 +125,9 @@
 			url: 'php/eliminar-usuario.php',
 			cache: false,
 			success: function (data){
-				$('#this-modal').html(data);
+				setTimeout(() => { $('#spinner').hide() }, 1000);
+				setTimeout(() => { $('#this-modal').html(data) }, 1200);
 			}
 		})
-	}
- 
- 
- 
+	} 
  </script>
