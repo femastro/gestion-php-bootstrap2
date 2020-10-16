@@ -10,11 +10,17 @@
 				var codigo = $('#inCodigo').val();
 				info_articulo(codigo);
 			})
-			</script>
+		</script>
 <?php
+
 	}
 
 	?>
+		<script>
+			$(document).ready(function(){
+				$('#spinner').hide();
+			})
+		</script>
 		<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
@@ -94,11 +100,6 @@
 				</div>
 			</div>
 			<div class="row mt-2">
-				<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
-					<div class="spinner-border text-primary" role="status">
-						<span class="sr-only">Loading...</span>
-					</div> Loading....
-				</div>
 				<table class="col-xl-12 col-sm-12 table" id="table">
 					<thead>
 						<tr>
@@ -120,7 +121,13 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody id="tbody"></tbody>
+					<tbody id="tbody">
+						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+							<div class="spinner-border text-primary" role="status">
+								<span class="sr-only">Loading...</span>
+							</div> Loading....
+						</div>
+				</tbody>
 				</table>
 			</div>
 		</main>
@@ -152,7 +159,6 @@
 	-->
 	</body>
 	<script>
-
 		function procesar() {
 			
 			setTimeout( () => { $('.hidden-print').addClass('hidden')}, 500);
@@ -426,14 +432,14 @@
 					success: function(data){
 						if (data) {
 
-							$('#spinner').removeClass('hidden');
+							$('#spinner').show();
 			
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
-
-							setTimeout(() => { imprimir(data) }, 1500 );
+							setTimeout(() => { $('#spinner').hide() }, 1000);
+							setTimeout(() => { imprimir(data) }, 1200 );
 							
 						}else{
-
+							
 							$('#this-modal').html('ATENCIÓN, HA OCURRIDO UN PROBLEMA !');
 							$('#Modal').modal();
 							
@@ -494,15 +500,13 @@
 				url: "php/buscar-articulo-codigo.php",
 				cache: false,
 				success: function (data){
-					$('#spinner2').removeClass('hidden');
+					$('#spinner2').show();
 					setTimeout(() => { $('#this-modal').html(data) }, 1000);
-					setTimeout(() => { $('#spinner2').addClass('hidden') }, 1000);
+					setTimeout(() => { $('#spinner2').hide() }, 1000);
 					$('#Modal').modal();
 				}
 			})
 
 		}
-
-
 	</script>
 </html>

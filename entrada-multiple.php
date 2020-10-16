@@ -3,6 +3,11 @@
 	
 	require "header.php";
 ?>
+	<script>
+		$(document).ready(function(){
+			$('#spinner').hide();
+		})
+	</script>
 	<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
@@ -220,7 +225,6 @@
 
 		}
 
-
 		function sortTable(n,type) {
 			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
 			 
@@ -340,7 +344,6 @@
 			}
 		}
 
-
 		function onAgregar(){
 			
 			var tbody = document.getElementById('tbody').innerHTML;
@@ -382,11 +385,11 @@
 
 							$('#procesar').prop('disabled','');
 
-							$('#spinner').removeClass('hidden');
+							$('#spinner').show();
 			
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
-
-							setTimeout(() => { imprimir(data) }, 2000 );
+							setTimeout(() => { $('#spinner').hide(); }, 1500 );
+							setTimeout(() => { imprimir(data) }, 1500 );
 							
 						}else{
 
@@ -427,31 +430,6 @@
 			})
 		}
 
-		
-		async function chekCodigo(dataString){
-			var table = document.getElementById('table');
-			var rows, x, y;
-			var codigo = [];
-			var cant = 0;
-			rows = table.rows;
-			$.ajax({
-				type: 'POST',
-				data: dataString,
-				url: 'php/buscar-codigo.php',
-				cache: false,
-				success: function(datos){
-					for (i = 2; i < (rows.length); i++) {
-						x= rows[i].getElementsByTagName('TD')[4];
-						y= rows[i].getElementsByTagName('TD')[0];
-						if ( y.innerHTML  ==  datos ) {
-							cod = y.innerHTML;
-							$('#'+cod).remove();
-						}
-					}
-				}
-			})
-		}
-
 		async function imprimir(data){
 			var tbody = document.getElementById('tbody').innerHTML;
 			$('#tbody ').html(tbody);
@@ -461,9 +439,6 @@
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').val(0);
-			$('#spinner').addClass('hidden');
 		}
-
-
 	</script>
 </html>
