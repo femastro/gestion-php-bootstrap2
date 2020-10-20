@@ -1,11 +1,11 @@
-<?php 
-	require "validator.php";
-	require "header.php";
-	require "conexion.php";
-	require "php/buscar-usuarios.php";
-	
- ?>
- <script>
+<?php
+require "validator.php";
+require "header.php";
+require "conexion.php";
+require "php/buscar-usuarios.php";
+
+?>
+<script>
 	$(document).ready(function(){
 		$('#spinner').hide();
 	})
@@ -27,32 +27,32 @@
 						 <div class="col-xs-5 col-sm-5"><a href="#" onclick="new_user()" data-toggle="modal" data-target="#Modal">Nuevo</a></div>
 					</div>
 					<hr>
-					<?php
-						$i = 1;
-						while ($row = mysqli_fetch_assoc($resultado)) {
-					?>
-							<div class="row text-center mb-2 resaltar" style="padding: 10px 5px">
-								<div class="col-xs-1 col-sm-1"><?php echo $i ?></div>
-								<div class="col-xs-3 col-sm-3"><?php echo $row['usuario'] ?></div>
-								<div class="col-xs-3 col-sm-3"><?php echo $row['privilegios'] ?></div>
-					<?php
-								if($row['usuario'] != "Admin"){
-					?>
-									<div class="col-xs-3 col-sm-3">
-										<a href="#" onclick="edit_user(<?php echo $row['idusuarios'] ?>)" data-toggle="modal" data-target="#Modal">Editar</a>
-									</div>
-									<div class="col-xs-2 col-sm-2">
-										<a href="#" onclick="delete_user(<?php echo $row['idusuarios'] ?>)" data-toggle="modal" data-target="#Modal">Quitar</a>
-									</div>
-					<?php
-								}
-					?>
-							</div>
-							<hr>
-					<?php
-							$i++;
-						}
-					?>
+<?php
+$i = 1;
+while ($row = mysqli_fetch_assoc($resultado)) {
+	?>
+								<div class="row text-center mb-2 resaltar" style="padding: 10px 5px">
+									<div class="col-xs-1 col-sm-1"><?php echo $i?></div>
+									<div class="col-xs-3 col-sm-3"><?php echo $row['usuario']?></div>
+									<div class="col-xs-3 col-sm-3"><?php echo $row['privilegios']?></div>
+	<?php
+	if ($row['usuario'] != "Admin") {
+		?>
+											<div class="col-xs-3 col-sm-3">
+												<a href="#" onclick="edit_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Editar</a>
+											</div>
+											<div class="col-xs-2 col-sm-2">
+												<a href="#" onclick="delete_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Quitar</a>
+											</div>
+		<?php
+	}
+	?>
+	</div>
+								<hr>
+	<?php
+	$i++;
+}
+?>
 					<div class="row text-center">
 						<div class="col-xs-12 col-sm-12">
 							<a class="btn btn-danger btn-block" href="index.php">CERRAR</a>
@@ -76,7 +76,7 @@
 	      </div>
 	      <div class="modal-body row">
 				<div  id="this-modal" class="col-12 col-sm-12"></div>
-                <div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 3px;font-size:12px;" id="spinner">
+                <div class="col-xs-12 col-sm-12 text-center" style="margin: 3px;font-size:12px;" id="spinner">
 					<div class="spinner-border text-primary" role="status">
 						<span class="sr-only">Loading...</span>
 					</div> Loading....
@@ -129,5 +129,5 @@
 				setTimeout(() => { $('#this-modal').html(data) }, 1200);
 			}
 		})
-	} 
+	}
  </script>

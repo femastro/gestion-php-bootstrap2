@@ -1,18 +1,17 @@
-<?php 
-	require "validator.php";
-	
-	require "header.php";
-	require "conexion.php";
+<?php
+require "validator.php";
 
-	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockneumaticos ORDER BY marca ASC";
-	$neumaticos = mysqli_query($link,$sql);
+require "header.php";
+require "conexion.php";
 
-	$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas ORDER BY marca ASC";
-	$llantas = mysqli_query($link,$sql);
+$sql        = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockneumaticos ORDER BY marca ASC";
+$neumaticos = mysqli_query($link, $sql);
 
-	mysqli_close($link);
+$sql     = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM stockllantas ORDER BY marca ASC";
+$llantas = mysqli_query($link, $sql);
+
+mysqli_close($link);
 ?>
-
 <main class="container-fluid">
 	<div class="row">
 		<h5 class="mt-2">Stock</h5>
@@ -57,7 +56,7 @@
 						    	Buscar
 						    </button>
 							&nbsp;
-							
+
 						</div>
 						<div class="col-xl-2 col-sm-3">
 							<button class="btn btn-danger btn-block" onclick="location.href='stock.php'">
@@ -67,7 +66,7 @@
 								</svg>&nbsp;
 						    	Limpiar
 						    </button>
-							
+
 						</div>
 					</div>
 				</div>
@@ -133,51 +132,52 @@
 				</tr>
 			</thead>
 			<tbody id="tbody">
-				<?php 
-					$x = 1;
-					while ($row = mysqli_fetch_assoc($neumaticos)){
-						$cod = $row['codigo'];
-				?>
-					<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
-						<td width="5%"><?php echo $x ?></td>
-						<td width="8%"><?php echo $row['codigo'] ?></td>
-						<td width="20%"><?php echo $row['marca'] ?></td>
-						<td width="20%"><?php echo $row['modelo'] ?></td>
-						<td width="20%"><?php echo $row['medida'] ?></td>
-						<td width="5%"><?php echo $row['cantidad'] ?></td>
-						<td width="12%" class="hidden-print text-center">
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-							</svg>&nbsp;
-							<a href="#" onclick="editar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;&nbsp;
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-							  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-							  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-							</svg>&nbsp;
-							<a href="#" onclick="quitar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
-						</td>
-						<td width="15%" class="hidden-print">
-							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn btn-primary btn-ver" data-toggle="modal" data-target="#Modal-edit">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-								  	<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-									<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-								  <circle cx="8" cy="4.5" r="1"/>
-								</svg>&nbsp;Ver +
-							</a>
-						</td>
-					</tr>
-				<?php
-						$x++;
-					}
-				?>
-			</tbody>
+<?php
+$x = 1;
+while ($row = mysqli_fetch_assoc($neumaticos)) {
+	$cod = $row['codigo'];
+	?>
+							<tr id="<?php echo $row['codigo']?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo']?>')">
+								<td width="5%"><?php echo $x?></td>
+								<td width="8%"><?php echo $row['codigo']?></td>
+								<td width="20%"><?php echo $row['marca']?></td>
+								<td width="20%"><?php echo $row['modelo']?></td>
+								<td width="20%"><?php echo $row['medida']?></td>
+								<td width="5%"><?php echo $row['cantidad']?></td>
+								<td width="12%" class="hidden-print text-center">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+										 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+									</svg>&nbsp;
+									<a href="#" onclick="editar('<?php echo $cod?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;
+		&nbsp;
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+									  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+									</svg>&nbsp;
+									<a href="#" onclick="quitar('<?php echo $cod?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
+								</td>
+								<td width="15%" class="hidden-print">
+									<a href="#" onclick="ver('<?php echo $cod?>')" class="btn btn-primary btn-ver" data-toggle="modal" data-target="#Modal-edit">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+										  	<path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+											<path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+										  <circle cx="8" cy="4.5" r="1"/>
+										</svg>&nbsp;Ver +
+									</a>
+								</td>
+							</tr>
+	<?php
+	$x++;
+}
+?>
+</tbody>
 		</table>
 	</div>
-<!-- 
-	GRILLA de LLANTAS 
+<!--
+	GRILLA de LLANTAS
 -->
 	<div class="row">
 		<table class="col-xl-12 col-sm-12 table" id="table2">
@@ -222,57 +222,58 @@
 						  <path d="M5.75 13.5c.167-.333.25-.833.25-1.5h4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75z"/>
 						  <path fill-rule="evenodd" d="M13.991 3H2c-.325 0-.502.078-.602.145a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3zM14 2H2C0 2 0 4 0 4v6c0 2 2 2 2 2h12c2 0 2-2 2-2V4c0-2-2-2-2-2z"/>
 						</svg>
-					</th>						
+					</th>
 				</tr>
 			</thead>
 			<tbody id="tbody2">
-				<?php
-					$x = 1;
-					while ($row = mysqli_fetch_assoc($llantas)){
-						$cod = $row['codigo'];
-				?>
-					<tr id="<?php echo $row['codigo'] ?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo'] ?>')">
-						<td width="5%"><?php echo $x ?></td>
-						<td width="8%"><?php echo $row['codigo'] ?></td>
-						<td width="20%"><?php echo $row['marca'] ?></td>
-						<td width="20%"><?php echo $row['modelo'] ?></td>
-						<td width="20%"><?php echo $row['medida'] ?></td>
-						<td width="5%"><?php echo $row['cantidad'] ?></td>
-						<td width="12%" class="hidden-print text-center">
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
-								 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
-							</svg>&nbsp;
-							<a href="#" onclick="editar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;&nbsp;
-							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-							  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-							  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-							  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-							</svg>&nbsp;
-							<a href="#" onclick="quitar('<?php echo $cod ?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
-						</td>
-						<td width="15%" class="hidden-print">
-							<a href="#" onclick="ver('<?php echo $cod ?>')" class="btn-ver btn btn-primary" data-toggle="modal" data-target="#Modal-edit">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-								  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-								  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-								  <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-								  <circle cx="8" cy="4.5" r="1"/>
-								</svg>&nbsp;Ver +
-							</a>
-						</td>
-					</tr>
-				<?php
-						$x++;
-					}
-					mysqli_close($link);
-				 ?>
-			</tbody>
+<?php
+$x = 1;
+while ($row = mysqli_fetch_assoc($llantas)) {
+	$cod = $row['codigo'];
+	?>
+							<tr id="<?php echo $row['codigo']?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo']?>')">
+								<td width="5%"><?php echo $x?></td>
+								<td width="8%"><?php echo $row['codigo']?></td>
+								<td width="20%"><?php echo $row['marca']?></td>
+								<td width="20%"><?php echo $row['modelo']?></td>
+								<td width="20%"><?php echo $row['medida']?></td>
+								<td width="5%"><?php echo $row['cantidad']?></td>
+								<td width="12%" class="hidden-print text-center">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
+										 <path d="M9 4.5V1l5 5h-3.5A1.5 1.5 0 0 1 9 4.5z"/>
+									</svg>&nbsp;
+									<a href="#" onclick="editar('<?php echo $cod?>')" data-toggle="modal" data-target="#Modal-edit">Editar</a>&nbsp;
+		&nbsp;
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									  	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									  	<path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+									  	<path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+									</svg>&nbsp;
+									<a href="#" onclick="quitar('<?php echo $cod?>')" data-toggle="modal" data-target="#Modal-edit">Quitar</a>
+								</td>
+								<td width="15%" class="hidden-print">
+									<a href="#" onclick="ver('<?php echo $cod?>')" class="btn-ver btn btn-primary" data-toggle="modal" data-target="#Modal-edit">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+										  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+										  <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+										  <circle cx="8" cy="4.5" r="1"/>
+										</svg>&nbsp;Ver +
+									</a>
+								</td>
+							</tr>
+	<?php
+	$x++;
+}
+
+?>
+</tbody>
 		</table>
 	</div>
 </main>
 	<!---
-		MODAL Editar ARTICULO 
+		MODAL Editar ARTICULO
 	-->
 	<div class="modal fade" id="Modal-edit" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="width: 100%">
 	  	<div class="modal-dialog" role="document">
@@ -303,7 +304,7 @@
 	-->
 <script>
 ///
-/// FUNCTION 
+/// FUNCTION
 //////////////////////
 
 	function printTable(table) {
@@ -342,7 +343,7 @@
 				processData: false,
 				success: function(response) {
 					if (response) {
-						alert('Imagen Guardada con Exito !')		               	
+						alert('Imagen Guardada con Exito !')
 					}
 				},
 	    	});
@@ -353,12 +354,12 @@
 
 	function sortTable(n,type,tabla) {
 		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-		 
+
 		table = document.getElementById("table"+tabla);
 		switching = true;
 		  //Set the sorting direction to ascending:
 		dir = "asc";
-		 
+
 		  /*Make a loop that will continue until no switching has been done:*/
 	  	while (switching) {
 		    switching = false;
@@ -493,8 +494,10 @@
 	function buscar_modelo(marca){
 		$('#tbody2').html('');
 		var producto = $('#tipo-producto').val();
-		var modelo = 0;////$('#selectModelo').val();
-		var medida = 0;////$('#selectMedida').val();
+		var modelo = 0;
+////$('#selectModelo').val();
+		var medida = 0;
+////$('#selectMedida').val();
 		var dataString = "medida="+medida+"&modelo="+modelo+"&marca="+marca+"&producto="+producto;
 		$.ajax({
 			type: 'POST',
@@ -538,7 +541,8 @@
 	function buscar_medida(modelo){
 		var producto = $('#tipo-producto').val();
 		var marca = $('#selectMarca').val();
-		var medida = 0;//$('#selectMedida').val();
+		var medida = 0;
+//$('#selectMedida').val();
 		var dataString = "medida="+medida+"&modelo="+modelo+"&marca="+marca+"&producto="+producto;
 		$.ajax({
 			type: 'POST',
@@ -626,7 +630,7 @@
    			}
    		})
 	}
-	  
+
 	function editar(codigo){
 	    $('#ModalLabelEdit').html('Editar Articulo');
 		$('#form-act-imagen').html('<form class="form-img" method="post" enctype="multipart/form-data"><input type="file" name="img"><input type="hidden" name="codigo" value=""><br><br><button class="btn btn-block btn-info" onclick="actualizar_foto()">ACTUALIZAR IMAGÉN</button></form>');

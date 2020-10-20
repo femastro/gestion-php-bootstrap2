@@ -1,6 +1,6 @@
 <?php
-    require "validator.php";
-    require "header.php";
+require "validator.php";
+require "header.php";
 ?>
     <body class="container-fluid">
         <div class="row mt-5">
@@ -11,7 +11,7 @@
                         <h3>Nuevo Articulo</h3>
                     </div>
                 </div>
-                <form id="form">
+                <form id="form" class="form-group">
                     <table class="table">
                         <thead>
                             <tr>
@@ -22,7 +22,7 @@
                             <tr>
                                 <td>PRODUCTO </td>
                                 <td>
-                                    <select name="" id="tipo-Producto" class="form-control">
+                                    <select name="" id="tipo-producto" class="form-control">
                                         <option value="0">Seleccionar...</option>
                                         <option value="1">NEUMATICOS</option>
                                         <option value="2">LLANTAS</option>
@@ -59,7 +59,10 @@
                                             <input id="guardar" class="btn btn-block btn-primary" value="GUARDAR">
                                         </div>
                                         <div class="col-3">
-                                            <a href="entrada-multiple.php" class="btn btn-block btn-danger">CANCELAR</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="entrada-multiple.php" class="btn btn-block btn-danger">CANCELAR</a>&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
                                         </div>
                                     </div>
                                 </td>
@@ -68,7 +71,7 @@
                     </table>
                 </form>
                 <p style="color:gray;">
-                    <strong>-</strong> Aquí se agrega un articulo que no se encuentra en la Base de Datos de Stock. <br>
+                    <strong>-</strong> Aquí se agrega un articulo que NO se encuentra en la Base de Datos de Stock. <br>
                     * Todos los Campos son Obligatorios.
                 </p>
             </div>
@@ -76,31 +79,41 @@
     </body>
     <script>
         $('#guardar').click(function(){
+
             var tipo = $('#tipo-producto').val();
             var marca = $('#marca').val();
             var modelo = $('#modelo').val();
             var medida = $('#medida').val();
 
-            if (marca.length > 0 && modelo.length > 0 && medida.length > 0){
+            if (tipo == 0){
 
-                var dataString = "tipo="+tipo+"&marca="+marca+"&modelo="+modelo+"&medida="+medida;
-                $.ajax({
-                    type: 'POST',
-                    data: dataString,
-                    url: 'php/guardar-nuevo-producto.php',
-                    cache: false,
-                    success: function(res){
-                        if (res == 1) {
-                            window.alert("El Articulo se Guardo Correctamente !");
-                            location.href="entrada-multiple.php";
-                        }else{
-                            window.alert("Ha Ocurrido un Error !");
-                        }
-                    }
-                });
+                window.alert("DEBE SELECCIONAR TIPO DE PRODUCTO !");
 
             }else{
-                window.alert("Complete Los Campos !");
+
+                if (marca.length > 0 && modelo.length > 0 && medida.length > 0){
+
+                    var dataString = "tipo="+tipo+"&marca="+marca+"&modelo="+modelo+"&medida="+medida;
+
+                    $.ajax({
+                        type: 'POST',
+                        data: dataString,
+                        url: 'php/guardar-nuevo-producto.php',
+                        cache: false,
+                        success: function(res){
+                            if (res == 1) {
+                                window.alert("El Articulo se Guardo Correctamente !");
+                                location.href="entrada-multiple.php";
+                            }else{
+                                window.alert("Ha Ocurrido un Error !");
+                            }
+                        }
+                    });
+
+                }else{
+                    window.alert("Complete Los Campos !");
+                }
+
             }
         });
     </script>
