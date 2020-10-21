@@ -122,7 +122,7 @@
 						</tr>
 					</thead>
 					<tbody id="tbody">
-						<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+						<div class="col-xs-12 col-sm-12 text-center" style="margin: 2px;font-size:12px;" id="spinner">
 							<div class="spinner-border text-primary" role="status">
 								<span class="sr-only">Loading...</span>
 							</div> Loading....
@@ -144,7 +144,7 @@
 						</button>
 					</div>
 					<div id="this-modal" class="modal-body"></div>
-					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner2">
+					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5" style="font-size:12px;" id="spinner2">
 						<div class="spinner-border text-primary" role="status">
 							<span class="sr-only">Loading...</span>
 						</div> Loading....

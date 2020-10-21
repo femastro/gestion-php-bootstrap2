@@ -286,7 +286,7 @@ while ($row = mysqli_fetch_assoc($llantas)) {
 	      		</div>
 				<div class="modal-body">
 					<div  id="this-modal-edit"></div>
-					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 hidden" style="font-size:12px;" id="spinner">
+					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5" style="font-size:12px;" id="spinner">
 						<div class="spinner-border text-primary" role="status">
 							<span class="sr-only">Loading...</span>
 						</div> Loading....
