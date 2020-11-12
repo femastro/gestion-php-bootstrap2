@@ -60,9 +60,9 @@ require "header.php";
                                         </div>
                                         <div class="col-3">
                                             <a href="entrada-multiple.php" class="btn btn-block btn-danger">CANCELAR</a>&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+                                            &nbsp;
+                                            &nbsp;
+                                            &nbsp;
                                         </div>
                                     </div>
                                 </td>

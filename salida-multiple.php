@@ -1,21 +1,21 @@
-<?php 
-	require "validator.php";
-	require "header.php";
-
-	if (!empty($_GET['codigo'])){
-
-?>
-		<script>
-			$(document).ready(function(){
-				var codigo = $('#inCodigo').val();
-				info_articulo(codigo);
-			})
-		</script>
 <?php
+require "validator.php";
+require "header.php";
 
-	}
+if (!empty($_GET['codigo'])) {
 
 	?>
+	<script>
+						$(document).ready(function(){
+							var codigo = $('#inCodigo').val();
+							info_articulo(codigo);
+						})
+					</script>
+	<?php
+
+}
+
+?>
 		<script>
 			$(document).ready(function(){
 				$('#spinner').hide();
@@ -28,7 +28,7 @@
 				<div class="mt-2 col-xl-12 col-sm-12 fieldset">
 				  	<p class="legend">Filtros</p>
 					  <div class="row">
-						  <input type="hidden" id="inCodigo" value="<?php echo $_GET['codigo'] ?>">
+						  <input type="hidden" id="inCodigo" value="<?php echo $_GET['codigo']?>">
 						  <div class="col-xl-2 col-sm-2 form-group">
 							  <label for="">Productos :</label>
 							<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 					<!-- Linea Botones -->
-					<div class="row">		
+					<div class="row">
 						<div class="col-xl-6 col-sm-3 form-inline" style="margin-top: 12px">
 							&nbsp;
 				    	</div>
@@ -104,7 +104,7 @@
 					<thead>
 						<tr>
 							<th colspan="6">
-								<h6>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h6>
+								<h6>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i')?> )</span></h6>
 							</th>
 						</tr>
 						<tr>
@@ -132,7 +132,7 @@
 			</div>
 		</main>
 	<!---
-			MODAL 
+			MODAL
 	-->
 		<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -160,7 +160,7 @@
 	</body>
 	<script>
 		function procesar() {
-			
+
 			setTimeout( () => { $('.hidden-print').addClass('hidden')}, 500);
 
 			var table = $("table"),
@@ -178,7 +178,7 @@
 			    var key, value;
 
 			    $(this).find("td").each(function (i) {
-				    
+
 				    key = header[i+1];
 				    value = $(this).html();
 					row[key] = value;
@@ -225,12 +225,12 @@
 
 		function sortTable(n,type) {
 			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-				 
+
 			table = document.getElementById("table");
 			switching = true;
 				  //Set the sorting direction to ascending:
 			dir = "asc";
-				 
+
 				  /*Make a loop that will continue until no switching has been done:*/
 			  while (switching) {
 			    switching = false;
@@ -279,7 +279,7 @@
 	        newWin.document.write('<style>.table{width:95%;margin:auto;font-size:13px}.table input{font-size: 6px}th .span{font-size:.2rem}th{border: thin solid black}td{border: thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
 	        newWin.print();
 	        newWin.close();
-	   	}		
+	   	}
 
 		function tipo_producto(valor){
 			$('#selectMarca').html('');
@@ -384,7 +384,7 @@
 
 		function onAgregar(dato=null){
 			$('.modal-footer').show();
-			
+
 			if (dato != null){
 
 				var producto = dato;
@@ -433,16 +433,16 @@
 						if (data) {
 
 							$('#spinner').show();
-			
+
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
 							setTimeout(() => { $('#spinner').hide() }, 1000);
 							setTimeout(() => { imprimir(data) }, 1200 );
-							
+
 						}else{
-							
+
 							$('#this-modal').html('ATENCIÓN, HA OCURRIDO UN PROBLEMA !');
 							$('#Modal').modal();
-							
+
 						}
 					}
 				})
