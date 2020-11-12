@@ -206,7 +206,7 @@ if (!empty($_SESSION['login'])) {
 }
 ?>
 </div>
-			</nav>
-		</header>
+</nav>
+</header>
 
 

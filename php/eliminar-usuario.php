@@ -22,7 +22,7 @@
         </div>
         <hr>
         <div class="mt-4">
-            <button class="btn btn-primary btn-block" onclick="eliminar(<?php echo $row['idusuarios'] ?>)">Eliminar</button>
+            <button class="btn btn-primary btn-block" onclick="eliminar(<?php echo $row['idusuarios'] ?>)">ELIMINAR</button>
         </div>
         <div class="mt-3">
             <button type="button" class="btn btn-block btn-danger mt-2" data-dismiss="modal">CERRAR</button>

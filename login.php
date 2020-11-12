@@ -39,7 +39,7 @@
 					</form>
 				</div>
 				<div class="card-footer text-left mt-2">
-					- Seccionar la sucursal en la que se encuentra.
+					- Seleccionar la sucursal en la que se encuentra esta terminal.
 				</div>
 			</div>
 		</div>
