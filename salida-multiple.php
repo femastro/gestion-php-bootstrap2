@@ -6,55 +6,51 @@ if (!empty($_GET['codigo'])) {
 
 	?>
 	<script>
-						$(document).ready(function(){
-							var codigo = $('#inCodigo').val();
-							info_articulo(codigo);
-						})
-					</script>
+					$(document).ready(function(){
+						var codigo = $('#inCodigo').val();
+						info_articulo(codigo);
+					})
+				</script>
 	<?php
 
 }
 
 ?>
-		<script>
-			$(document).ready(function(){
-				$('#spinner').hide();
-			})
-		</script>
-		<script type="text/javascript" src="js/checkRole.js"></script>
+	<script>
+		$(document).ready(function(){
+			$('.spinner2').hide();
+		})
+	</script>
+	<script type="text/javascript" src="js/checkRole.js"></script>
 		<main class="container-fluid">
 			<div class="row">
 				<h5 class="mt-2">Salidas</h5>
 				<div class="mt-2 col-xl-12 col-sm-12 fieldset">
 				  	<p class="legend">Filtros</p>
-					  <div class="row">
+					  <div class="row mt-3">
 						  <input type="hidden" id="inCodigo" value="<?php echo $_GET['codigo']?>">
 						  <div class="col-xl-2 col-sm-2 form-group">
-							  <label for="">Productos :</label>
 							<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
-								<option value="0">Seleccionar ...</option>
+								<option value="0">Producto ...</option>
 								<option value="1">Neumaticos</option>
 								<option value="2">Llantas</option>
+								<option value="5">Accesorios</option>
 							</select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Marcas :</label>
 							<select class="form-control"  id="selectMarca" onchange="buscar_modelo(this.value)"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Modelos :</label>
 							<select class="form-control" id="selectModelo" onchange="buscar_medida(this.value)"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Medidas :</label>
 							<select class="form-control" id="selectMedida" onchange="buscar_cantidad(this.value)"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Cantidad</label>
 							<select class="form-control" id="selectCantidad"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<button class="btn btn-primary btn-block" style="margin-top: 27px;font-size:12px;" onclick="onAgregar()">
+							<button class="btn btn-primary btn-block" style="font-size:12px;" onclick="onAgregar()">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     				<path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 									<path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
@@ -100,11 +96,16 @@ if (!empty($_GET['codigo'])) {
 				</div>
 			</div>
 			<div class="row mt-2">
+				<div class="col-xs-12 col-sm-12 text-center spinner2" style="margin: 2px;font-size:12px;">
+					<div class="spinner-border text-primary" role="status">
+						<span class="sr-only">Loading...</span>
+					</div> Loading....
+				</div>
 				<table class="col-xl-12 col-sm-12 table" id="table">
 					<thead>
 						<tr>
 							<th colspan="6">
-								<h6>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i')?> )</span></h6>
+								<h6>REGISTRO de SALIDA: <span class="span-fecha">( Fecha : <?php echo date('d-m-Y'), ' - ', $hora->format("H:i:s");?> )</span></h6>
 							</th>
 						</tr>
 						<tr>
@@ -121,13 +122,7 @@ if (!empty($_GET['codigo'])) {
 							</th>
 						</tr>
 					</thead>
-					<tbody id="tbody">
-						<div class="col-xs-12 col-sm-12 text-center" style="margin: 2px;font-size:12px;" id="spinner">
-							<div class="spinner-border text-primary" role="status">
-								<span class="sr-only">Loading...</span>
-							</div> Loading....
-						</div>
-				</tbody>
+					<tbody id="tbody"></tbody>
 				</table>
 			</div>
 		</main>
@@ -144,7 +139,7 @@ if (!empty($_GET['codigo'])) {
 						</button>
 					</div>
 					<div id="this-modal" class="modal-body"></div>
-					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5" style="font-size:12px;" id="spinner2">
+					<div class="col-xs-12 col-sm-12 text-center mt-3 mb-5 spinner2" style="font-size:12px;">
 						<div class="spinner-border text-primary" role="status">
 							<span class="sr-only">Loading...</span>
 						</div> Loading....
@@ -277,6 +272,7 @@ if (!empty($_GET['codigo'])) {
 	        var divToPrint = document.getElementById('table');
 	        newWin = window.open("", 'PRINT', 'height=600,width=960,top=100,left=410,resizable=0');
 	        newWin.document.write('<style>.table{width:95%;margin:auto;font-size:13px}.table input{font-size: 6px}th .span{font-size:.2rem}th{border: thin solid black}td{border: thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
+
 	        newWin.print();
 	        newWin.close();
 	   	}
@@ -424,6 +420,7 @@ if (!empty($_GET['codigo'])) {
 			var dataString = "producto="+producto+"&marca="+marca+"&modelo="+modelo+"&medida="+medida+"&cantidad="+cantidad+"&cant="+cant+"&codigo="+codigo;
 
 			if (medida != null && cantidad > 0) {
+				$('.spinner2').show();
 				$.ajax({
 					type: 'POST',
 					data: dataString,
@@ -432,11 +429,9 @@ if (!empty($_GET['codigo'])) {
 					success: function(data){
 						if (data) {
 
-							$('#spinner').show();
-
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
-							setTimeout(() => { $('#spinner').hide() }, 1000);
-							setTimeout(() => { imprimir(data) }, 1200 );
+							setTimeout(() => { $('.spinner2').hide() }, 1400);
+							setTimeout(() => { imprimir(data) }, 1400 );
 
 						}else{
 
@@ -486,7 +481,6 @@ if (!empty($_GET['codigo'])) {
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').html('');
-			$('#spinner').addClass('hidden');
 			$('#procesar').prop('disabled','');
 		}
 
@@ -500,13 +494,34 @@ if (!empty($_GET['codigo'])) {
 				url: "php/buscar-articulo-codigo.php",
 				cache: false,
 				success: function (data){
-					$('#spinner2').show();
+					$('.spinner2').show();
 					setTimeout(() => { $('#this-modal').html(data) }, 1000);
-					setTimeout(() => { $('#spinner2').hide() }, 1000);
+					setTimeout(() => { $('.spinner2').hide() }, 1000);
 					$('#Modal').modal();
 				}
 			})
 
+		}
+
+		function quitar(cod=null){
+
+			$('#'+cod).remove();
+			var table = document.getElementById('table');
+			var rows, x, y;
+			var codigo = [];
+			var cant = [];
+
+			rows = table.rows;
+
+			for (i = 2; i < (rows.length); i++) {
+				y= rows[i].getElementsByTagName('TD')[0];
+				x= rows[i].getElementsByTagName('TD')[4];
+				cant.unshift(x.innerHTML);
+				codigo.unshift(y.innerHTML);
+			}
+			if (codigo == ''){
+				$('#procesar').prop('disabled','disabled');
+			}
 		}
 	</script>
 </html>

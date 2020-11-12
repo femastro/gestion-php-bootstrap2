@@ -16,6 +16,9 @@ if ($producto == 3) {
 if ($producto == 4) {
 	$tabla = 'llantas';
 }
+if ($producto == 5) {
+	$tabla = 'accesorios';
+}
 
 $marca  = $_POST['marca'];
 $modelo = $_POST['modelo'];
@@ -29,17 +32,20 @@ if (!empty($_POST['codigo'])) {
 	$codigoLista = explode(",", $_POST['codigo']);
 }
 
-$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida FROM ".$tabla." WHERE   marca = '".$marca."' AND modelo = '".$modelo."'  AND medida = '".$medida."'";
+$sql = 'SELECT marca, modelo, medida, cod_Articulo AS codigo FROM '.$tabla.' WHERE marca = "'.$marca.'" AND modelo = "'.$modelo.'" AND medida = "'.$medida.'"';
 
 $producto = mysqli_query($link, $sql);
 
 $cont = mysqli_num_rows($producto);
 
-if ($cont == 1) {
+if ($cont > 0) {
 
-	$row = mysqli_fetch_assoc($producto);
-
-	$cod = $row['codigo'];
+	while ($row = mysqli_fetch_assoc($producto)) {
+		$cod    = $row['codigo'];
+		$marca  = $row['marca'];
+		$modelo = $row['modelo'];
+		$medida = $row['medida'];
+	};
 
 	$x = 0;
 
@@ -53,14 +59,14 @@ if ($cont == 1) {
 	}
 
 	?>
-			<tr class="resaltar" id="<?php echo $cod?>">
-				<td width="8%"><?php echo $cod?></td>
-				<td width="25%"><?php echo $row['marca']?></td>
-				<td width="28%"><?php echo $row['modelo']?></td>
-				<td width="28%"><?php echo $row['medida']?></td>
-				<td width="8%" id="cantidad"><?php echo $cantidad?></td>
-				<td width="3%" class="hidden-print text-center"><a href="#" onclick="$('#<?php echo $cod?>').remove()" class="borrar">Quitar</a></td>
-			</tr>
+											<tr class="resaltar" id="<?php echo $cod?>">
+												<td width="8%"><?php echo $cod?></td>
+												<td width="25%"><?php echo $marca?></td>
+												<td width="28%"><?php echo $modelo?></td>
+												<td width="28%"><?php echo $medida?></td>
+												<td width="8%" id="cantidad"><?php echo $cantidad?></td>
+												<td width="3%" class="hidden-print text-center"><a href="#" onclick="quitar('<?php echo $cod?>')" class="borrar">Quitar</a></td>
+											</tr>
 	<?php
 }
 mysqli_close($link);

@@ -26,6 +26,9 @@ require "header.php";
                                         <option value="0">Seleccionar...</option>
                                         <option value="1">NEUMATICOS</option>
                                         <option value="2">LLANTAS</option>
+                                        <option value="3">CRITALES</option>
+                                        <option value="4">SERVICIO</option>
+                                        <option value="5">ACCESORIO</option>
                                     </select>
                                 </td>
                             </tr>
@@ -52,13 +55,13 @@ require "header.php";
                                 <tr>
                                 <td colspan="2" class="text-right">
                                     <div class="row">
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <input class="btn btn-block btn-success" type="reset" value="RESET">
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-4">
                                             <input id="guardar" class="btn btn-block btn-primary" value="GUARDAR">
                                         </div>
-                                        <div class="col-3">
+                                        <div class="col-4">
                                             <a href="entrada-multiple.php" class="btn btn-block btn-danger">CANCELAR</a>&nbsp;
                                             &nbsp;
                                             &nbsp;
@@ -101,6 +104,7 @@ require "header.php";
                         url: 'php/guardar-nuevo-producto.php',
                         cache: false,
                         success: function(res){
+                            console.log(res);
                             if (res == 1) {
                                 window.alert("El Articulo se Guardo Correctamente !");
                                 location.href="entrada-multiple.php";

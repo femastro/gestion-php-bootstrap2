@@ -1,51 +1,11 @@
 <?php
 require "../conexion.php";
 
-$producto = $_POST['producto'];
+$dato = $_POST['dato'];
 
-$order = "marca";
+$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM accesorios  WHERE  cod_Articulo LIKE 'N".$dato."%' OR marca  LIKE '".$dato."%' OR modelo  LIKE '".$dato."%'  OR medida  LIKE '".$dato."%'ORDER BY marca ASC";
 
-if ($producto == 1) {
-	$tabla = "stockneumaticos";
-}
-if ($producto == 2) {
-	$tabla = "stockllantas";
-}
-if ($producto == 5) {
-	$tabla = "accesorios";
-}
-
-$sql = "SELECT cod_Articulo AS codigo, marca, modelo, medida, cantidad FROM ".$tabla;
-
-if (strlen($_POST['marca']) > 3 || strlen($_POST['modelo']) > 3 || strlen($_POST['medida']) > 3) {
-	$sql .= " WHERE";
-}
-
-if (strlen($_POST['marca']) > 3) {//// true
-	$sql .= " marca ='".$_POST['marca']."'";
-}
-
-if (strlen($_POST['modelo']) > 3) {/// true
-	if (strlen($_POST['marca']) > 3) {
-		$sql .= " AND";
-	}
-	$sql .= " modelo ='".$_POST['modelo']."'";
-	$order = "modelo";
-}
-
-if (strlen($_POST['medida']) > 3) {/// true
-	if (strlen($_POST['modelo']) > 3 || strlen($_POST['marca']) > 3) {
-		$sql .= " AND";
-	}
-	$sql .= " medida ='".$_POST['medida']."'";
-	$order = "medida";
-}
-
-$sql .= " ORDER BY ".$order." ASC";
-
-$lista = mysqli_query($link, $sql);
-
-$x = 1;
+$neumaticos = mysqli_query($link, $sql);
 
 function image($img) {
 	$url     = '../imgProducto/'.$img.'.jpg';
@@ -60,7 +20,9 @@ function image($img) {
 	}
 }
 
-while ($row = mysqli_fetch_assoc($lista)) {
+$x = 1;
+
+while ($row = mysqli_fetch_assoc($neumaticos)) {
 	$cod = $row['codigo'];
 	?>
 			<tr id="<?php echo $row['codigo']?>" class="resaltar" ondblclick="salida_multiple('<?php echo $row['codigo']?>')">
@@ -93,5 +55,7 @@ while ($row = mysqli_fetch_assoc($lista)) {
 	<?php
 	$x++;
 }
+
 mysqli_close($link);
+
 ?>

@@ -1,47 +1,71 @@
 <?php
-	session_start();
+session_start();
 
-    require "../conexion.php";
+require "../conexion.php";
 
-    $tipo = $_POST['tipo'];
-    $marca = $_POST['marca'];
-    $modelo = $_POST['modelo'];
-    $medida = $_POST['medida'];
+$tipo   = $_POST['tipo'];
+$marca  = $_POST['marca'];
+$modelo = $_POST['modelo'];
+$medida = $_POST['medida'];
 
-    if($tipo == 0){
-        $tabla = "neumaticos";
-        $letra = "N";
-    }else{
-        $tabla = "llantas";
-        $letra = "L";
-    }
-    
-    $sql = "SELECT MAX(cod_Articulo) as codigo FROM ".$tabla; // consulta el ultimo registro para poder aumentar 1 al cod_Articulo
-    
-    $resultado = mysqli_query($link,$sql) or die(mysqli_error($link));
+if ($tipo == 1) {
+	$tabla = "neumaticos";
+	$letra = "N";
+}
+if ($tipo == 2) {
+	$tabla = "llantas";
+	$letra = "L";
+}
+if ($tipo == 3) {
+	$tabla = "accesorios";
+	$letra = "C";
+}
+if ($tipo == 4) {
+	$tabla = "accesorios";
+	$letra = "S";
+}
+if ($tipo == 5) {
+	$tabla = "accesorios";
+	$letra = "A";
+}
 
-    $row = mysqli_fetch_assoc($resultado);
-    
-    $cadena = intval(substr($row['codigo'], 1));
+$sql = "SELECT MAX(cod_Articulo) as codigo FROM ".$tabla;// consulta el ultimo registro para poder aumentar 1 al cod_Articulo
 
-    $cadena = $cadena + 1;
+$resultado = mysqli_query($link, $sql) or die(mysqli_error($link));
 
-    $codigo = $letra.$cadena;
+$row = mysqli_fetch_assoc($resultado);
 
-    $sql = "INSERT INTO ".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."',null)";
+$cadena = intval(substr($row['codigo'], 1));
 
-    mysqli_query($link,$sql) or die(mysqli_error($link));
+$cadena = $cadena+1;
 
-    $cont = mysqli_affected_rows($link);
+$codigo = $letra.$cadena;
 
-    if ($cont == 1){
-        echo 1;
-    }else{
-        echo 2;
-    }
+if ($letra == "A" || $letra == "S" || $letra == "C") {
 
+	$sql = "INSERT INTO ".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."',0,'','',null)";
 
-    mysqli_close($link);
+	$sqlUbicacion = "INSERT INTO ubicacion VALUES (null,'".$codigo."',0,0)";
+
+	$sqlUbicacion2 = "INSERT INTO ubicacion VALUES (null,'".$codigo."',0,1)";
+
+} else {
+	$sql = "INSERT INTO ".$tabla." VALUES (null,'".$codigo."','".$marca."','".$modelo."','".$medida."',null)";
+};
+
+mysqli_query($link, $sql) or die(mysqli_error($link));
+mysqli_query($link, $sqlUbicacion) or die(mysqli_error($link));
+mysqli_query($link, $sqlUbicacion2) or die(mysqli_error($link));
+
+$cont = mysqli_affected_rows($link);
+
+if ($cont == 1) {
+	echo 1;
+} else {
+	echo 2;
+}
+
+mysqli_close($link);
 
 ?>
 

@@ -1,48 +1,51 @@
-<?php 
-	
-	require '../conexion.php';
-	$cantidad = 0;
+<?php
 
-	if ($_POST['producto']==1) {
-		$tabla = 'stockneumaticos';
-	}
-	if ($_POST['producto']==2) {
-		$tabla = 'stockllantas';
-	}
-	if ($_POST['producto']==3) {
-		$tabla = 'neumaticos';
-	}
-	if ($_POST['producto']==4) {
-		$tabla = 'llantas';
-	}
+require '../conexion.php';
+$cantidad = 0;
 
-	$sql = "SELECT cantidad  FROM ".$tabla." WHERE marca ='".$_POST['marca']."' AND modelo = '".$_POST['modelo']."' AND medida = '".$_POST['medida']."'";
+if ($_POST['producto'] == 1) {
+	$tabla = 'stockneumaticos';
+}
+if ($_POST['producto'] == 2) {
+	$tabla = 'stockllantas';
+}
+if ($_POST['producto'] == 3) {
+	$tabla = 'neumaticos';
+}
+if ($_POST['producto'] == 4) {
+	$tabla = 'llantas';
+}
+if ($_POST['producto'] == 5) {
+	$tabla = 'accesorios';
+}
 
-	$datos = mysqli_query($link,$sql);
-	
-	$row = mysqli_fetch_assoc($datos);
+$sql = "SELECT cantidad  FROM ".$tabla." WHERE marca ='".$_POST['marca']."' AND modelo = '".$_POST['modelo']."' AND medida = '".$_POST['medida']."'";
 
-	$cont = mysqli_num_rows($datos);
+$datos = mysqli_query($link, $sql);
+
+$row = mysqli_fetch_assoc($datos);
+
+$cont = mysqli_num_rows($datos);
 
 ?>
-	<option value="0">Seleccionar ...</option>
-<?php 
-	if ($cont == 1 || $cont != null) {
-
-		$i = 1;
-		$cantidad = $row['cantidad'];
-
-		if ($_POST['cant']) {
-			$cantidad = $cantidad - $_POST['cant'];
-		}
-
-		while ($i <= $cantidad){
-?>	
-			<option value="<?php echo $i ?>"><strong><?php echo $i  ?></strong>&nbsp;Unidad</option>
+<option value="0">Cantidad ...</option>
 <?php
-		$i++;
-		}
+if ($cont == 1 || $cont != null) {
 
+	$i        = 1;
+	$cantidad = $row['cantidad'];
+
+	if ($_POST['cant']) {
+		$cantidad = $cantidad-$_POST['cant'];
 	}
-	mysqli_close($link);
+
+	while ($i <= $cantidad) {
+		?>
+					<option value="<?php echo $i?>"><strong><?php echo $i?></strong>&nbsp;Unidad</option>
+		<?php
+		$i++;
+	}
+
+}
+mysqli_close($link);
 ?>

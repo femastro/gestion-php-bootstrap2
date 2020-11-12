@@ -1,7 +1,6 @@
 <?php
 require "validator.php";
 require "header.php";
-require "conexion.php";
 require "php/buscar-usuarios.php";
 
 ?>
@@ -31,24 +30,24 @@ require "php/buscar-usuarios.php";
 $i = 1;
 while ($row = mysqli_fetch_assoc($resultado)) {
 	?>
-								<div class="row text-center mb-2 resaltar" style="padding: 10px 5px">
-									<div class="col-xs-1 col-sm-1"><?php echo $i?></div>
-									<div class="col-xs-3 col-sm-3"><?php echo $row['usuario']?></div>
-									<div class="col-xs-3 col-sm-3"><?php echo $row['privilegios']?></div>
+									<div class="row text-center mb-2 resaltar" style="padding: 10px 5px">
+										<div class="col-xs-1 col-sm-1"><?php echo $i?></div>
+										<div class="col-xs-3 col-sm-3"><?php echo $row['usuario']?></div>
+										<div class="col-xs-3 col-sm-3"><?php echo $row['privilegios']?></div>
 	<?php
 	if ($row['usuario'] != "Admin") {
 		?>
-											<div class="col-xs-3 col-sm-3">
-												<a href="#" onclick="edit_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Editar</a>
-											</div>
-											<div class="col-xs-2 col-sm-2">
-												<a href="#" onclick="delete_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Quitar</a>
-											</div>
+													<div class="col-xs-3 col-sm-3">
+														<a href="#" onclick="edit_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Editar</a>
+													</div>
+													<div class="col-xs-2 col-sm-2">
+														<a href="#" onclick="delete_user(<?php echo $row['idusuarios']?>)" data-toggle="modal" data-target="#Modal">Quitar</a>
+													</div>
 		<?php
 	}
 	?>
 	</div>
-								<hr>
+									<hr>
 	<?php
 	$i++;
 }

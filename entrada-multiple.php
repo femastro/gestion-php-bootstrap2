@@ -1,9 +1,9 @@
 <?php
-	require "validator.php";
-	
-	require "header.php";
+require "validator.php";
+
+require "header.php";
 ?>
-	<script>
+<script>
 		$(document).ready(function(){
 			$('#spinner').hide();
 		})
@@ -14,41 +14,38 @@
 				<h5 class="mt-2">Entradas</h5>
 				<div class="mt-2 col-xl-12 col-sm-12 fieldset">
 					<p class="legend">Filtros</p>
-					<div class="row">
+					<div class="row mt-3">
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Productos :</label>
 							<select class="form-control"  onchange="tipo_producto(this.value)" id="tipo-producto">
-								<option value="0">Seleccionar ...</option>
+								<option value="0">Producto ...</option>
 								<option value="3">Neumaticos</option>
 								<option value="4">Llantas</option>
+								<option value="5">Accesorios</option>
 							</select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Marcas :</label>
 							<select class="form-control"  id="selectMarca" onchange="buscar_modelo(this.value)"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Modelos :</label>
 							<select class="form-control" id="selectModelo" onchange="buscar_medida(this.value)"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Medidas :</label>
 							<select class="form-control" id="selectMedida"></select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<label for="">Cantidad</label>
 							<select class="form-control" id="selectCantidad" width="100%">
-								<?php 
-									for($i = 0; $i  < 51; $i++){
-								?>	
-										<option value="<?php echo $i ?>"><strong><?php echo $i  ?></strong>&nbsp;Un.</option>
-								<?php
-									}
-								?>
+								<option value="">Cantidad ...</option>
+<?php
+for ($i = 1; $i < 51; $i++) {
+	?>
+																<option value="<?php echo $i?>"><strong><?php echo $i?></strong>&nbsp;Un.</option>
+	<?php
+}
+?>
 							</select>
 						</div>
 						<div class="col-xl-2 col-sm-2 form-group">
-							<button class="btn btn-primary btn-block" style="margin-top: 27px;font-size:12px;" onclick="onAgregar()">
+							<button class="btn btn-primary btn-block" style="font-size:12px;" onclick="onAgregar()">
 								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 									<path fill-rule="evenodd" d="M4.5 2a.5.5 0 0 0-.5.5v11.066l4-2.667 4 2.667V8.5a.5.5 0 0 1 1 0v6.934l-5-3.333-5 3.333V2.5A1.5 1.5 0 0 1 4.5 1h4a.5.5 0 0 1 0 1h-4zm9-1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V1.5a.5.5 0 0 1 .5-.5z"/>
 									<path fill-rule="evenodd" d="M13 3.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
@@ -103,7 +100,7 @@
 				</div>
 			</div>
 			<div class="row mt-2">
-				<div class="col-xs-12 col-sm-12 text-center hidden" style="margin: 2px;font-size:12px;" id="spinner">
+				<div class="col-xs-12 col-sm-12 text-center" style="margin: 2px;font-size:12px;" id="spinner">
 					<div class="spinner-border text-primary" role="status">
 						<span class="sr-only">Loading...</span>
 					</div> Loading....
@@ -112,7 +109,7 @@
 					<thead>
 						<tr>
 							<th colspan="6">
-								<h6>REGISTRO de ENTRADA: <span class="span-fecha">( Fecha : <?php echo date('d / m / Y  H:i') ?> )</span></h6>
+								<h6>REGISTRO de ENTRADA: <span class="span-fecha">( Fecha : <?php echo date('d-m-Y'), ' - ', $hora->format("H:i:s");?> )</span></h6>
 							</th>
 						</tr>
 						<tr>
@@ -134,7 +131,7 @@
 			</div>
 		</main>
 			<!---
-				MODAL 
+				MODAL
 			-->
 			<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 			  <div class="modal-dialog" role="document">
@@ -164,7 +161,7 @@
 		function procesar() {
 
 			setTimeout( () => { $('.hidden-print').addClass('hidden')}, 500);
-			
+
 			var table = $("#table"),
 
 			rows = [],
@@ -180,7 +177,7 @@
 			    var key, value;
 
 			    $(this).find("td").each(function (i) {
-				    
+
 				    key = header[i+1];
 				    value = $(this).html();
 					row[key] = value;
@@ -188,8 +185,6 @@
 			    });
 			    rows.push(row);
 			});
-
-			console.log(rows);
 
 			var mensaje = "Desea imprimir el listado ?";
 			var procesar = "ACEPTAR para procesar la Entrada de productos !.";
@@ -227,12 +222,12 @@
 
 		function sortTable(n,type) {
 			var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-			 
+
 			table = document.getElementById("table");
 			switching = true;
 			  //Set the sorting direction to ascending:
 			dir = "asc";
-			 
+
 			  /*Make a loop that will continue until no switching has been done:*/
 		  	while (switching) {
 			    switching = false;
@@ -280,6 +275,7 @@
 	        var divToPrint = document.getElementById('table');
 	        newWin = window.open("", 'PRINT', 'height=600,width=960,top=100,left=410,resizable=0');
 	        newWin.document.write('<style>.table{width:95%;margin:auto;font-size:13px}.table input{font-size: 6px}th .span{font-size:.2rem}th{border: thin solid black}td{border: thin dotted lightgray}.hidden-print{display:none}</style>'+divToPrint.outerHTML);
+
 	        newWin.print();
 	        newWin.close();
 	   	}
@@ -345,7 +341,7 @@
 		}
 
 		function onAgregar(){
-			
+
 			var tbody = document.getElementById('tbody').innerHTML;
 
 			var producto = $('#tipo-producto').val();
@@ -382,20 +378,18 @@
 					cache: false,
 					success: function(data){
 						if (data) {
-
+							$('#spinner').show();
 							$('#procesar').prop('disabled','');
 
-							$('#spinner').show();
-			
 							setTimeout(() => { chekCodigo(dataString) }, 1000 );
-							setTimeout(() => { $('#spinner').hide(); }, 1500 );
-							setTimeout(() => { imprimir(data) }, 1500 );
-							
+							setTimeout(() => { $('#spinner').hide() }, 1400 );
+							setTimeout(() => { imprimir(data) }, 1400 );
+
 						}else{
 
 							$('#this-modal').html('ATENCIÓN, HA OCURRIDO UN PROBLEMA !');
 							$('#Modal').modal();
-							
+
 						}
 					}
 				})
@@ -439,6 +433,35 @@
 			$('#selectModelo').html('');
 			$('#selectMedida').html('');
 			$('#selectCantidad').val(0);
+		}
+
+
+		function quitar(cod=null){
+
+			$('#'+cod).remove();
+
+			var table = document.getElementById('table');
+			var rows, x, y;
+			var codigo = [];
+			var cant = [];
+
+			rows = table.rows;
+
+
+			for (i = 2; i < (rows.length); i++) {
+
+				y= rows[i].getElementsByTagName('TD')[0];
+				x= rows[i].getElementsByTagName('TD')[4];
+
+				cant.unshift(x.innerHTML);
+				codigo.unshift(y.innerHTML);
+
+			}
+
+			if (codigo == ''){
+				$('#procesar').prop('disabled','disabled');
+			}
+
 		}
 	</script>
 </html>
