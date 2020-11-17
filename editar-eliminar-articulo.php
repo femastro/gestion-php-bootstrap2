@@ -39,17 +39,22 @@ if ($cadena == "A" || $cadena == "S" || $cadena == "C") {
 	$articulo = "ACCESORIO";
 };
 
-$sql = "SELECT marca, modelo, medida, cantidad, cod_Proveedor FROM ".$tabla." WHERE cod_Articulo ='".$codigo."'";
+    $sql = "SELECT ".$tabla.".cod_Articulo, 
+                            ".$tabla.".marca, 
+                            ".$tabla.".modelo, 
+                            ".$tabla.".medida, 
+                            ".$tabla.".cantidad AS cantTotal, 
+                            ".$tabla.".cod_Proveedor, 
+                            ubicacion.cantidad, 
+                            ubicacion.ubicacion 
+                            FROM ".$tabla." inner join ubicacion 
+                            WHERE ".$tabla.".cod_Articulo ='".$codigo."' 
+                                        AND ubicacion.codigo = '".$codigo."' 
+                                        AND ubicacion.ubicacion =".$_SESSION['local'];$sql = "SELECT marca, modelo, medida, cantidad, cod_Proveedor FROM ".$tabla." WHERE cod_Articulo ='".$codigo."'";
 
 $resultado = mysqli_query($link, $sql) or die(mysqli_error($link));
 
 $row = mysqli_fetch_assoc($resultado);
-
-$sql = "SELECT cantidad FROM ubicacion WHERE codigo ='".$codigo."' AND ubicacion=".$_SESSION['local'];
-
-$resp = mysqli_query($link, $sql) or die(mysqli_error($link));
-
-$rowLocal = mysqli_fetch_assoc($resp);
 
 function image($img) {
 	$url     = 'imgProducto/'.$img.'.jpg';
@@ -87,7 +92,7 @@ mysqli_close($link);
             <div class="card-body">
                 <form action="php/actualizar-articulo.php" method="POST">
                     <input type="hidden" name="codigo" value="<?php echo $codigo?>" id="codigo">
-                    <input type="hidden" name="stockLocal" value="<?php echo $rowLocal['cantidad']?>">
+                    <input type="hidden" name="stockLocal" value="<?php echo $row['cantidad']?>">
                     <div class="form-group">
                         <label for="marca" style="font-size: 12px;">MARCA</label>
                         <input type="text" name="marca" class="form-control" value="<?php echo $row['marca']?>">
@@ -102,11 +107,11 @@ mysqli_close($link);
                     </div>
                     <div class="form-group" id="input-stock">
                         <label for="stock">STOCK LOCAL : <strong><?php echo $local?></strong></label>
-                        <input type="text" name="nuevoStockLocal" class="form-control" value="<?php echo $rowLocal['cantidad']?>">
+                        <input type="text" name="nuevoStockLocal" class="form-control" value="<?php echo $row['cantidad']?>">
                     </div>
                     <div class="form-group" id="input-stock">
                         <label for="stock">STOCK TOTAL</label>
-                        <input type="text" name="stock" class="form-control" readonly value="<?php echo $row['cantidad']?>">
+                        <input type="text" name="stock" class="form-control" readonly value="<?php echo $row['cantTotal']?>">
                     </div>
                     <div class="form-group" id="input-proveedor">
                         <label for="proveedor">PROVEEDOR</label>
