@@ -361,7 +361,7 @@ while ($row = mysqli_fetch_assoc($accesorios)) {
 	$x++;
 }
 ?>
-</tbody>
+				</tbody>
 		</table>
 	</div>
 </main>

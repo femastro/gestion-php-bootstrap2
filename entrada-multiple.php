@@ -155,7 +155,7 @@ for ($i = 1; $i < 51; $i++) {
 	</body>
 	<script>
 		function nuevo_ingreso(){
-			location.href="nuevo-articulo.php";
+			$('#this-modal').load('nuevo-articulo.php');
 		}
 
 		function procesar() {
